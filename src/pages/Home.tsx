@@ -1,7 +1,17 @@
-import React from "react";
+import { useContext } from "react";
+import { Context } from "../App";
+import ToggleMode from "../components/ToggleMode";
 
 function Home() {
-  return <div>Home</div>;
+  const { darkMode } = useContext(Context);
+  console.log(darkMode);
+  return (
+    <div className={`${darkMode ? "dark" : ""}`}>
+      Home
+      <div className={"dark:bg-darkBG"}>ragvac</div>
+      <ToggleMode />
+    </div>
+  );
 }
 
 export default Home;

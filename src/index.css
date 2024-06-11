@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.light {
+  --background: #f4f7fd;
+}
+.dark {
+  --background: #20212c;
+}
