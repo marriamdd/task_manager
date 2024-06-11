@@ -16,6 +16,8 @@ export interface IContext {
   setShowAllBoards: React.Dispatch<React.SetStateAction<boolean>>;
   boardName: string;
   setBoardName: React.Dispatch<React.SetStateAction<string>>;
+  showAddNewBoard: boolean;
+  setShowAddNewBoard: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Context = createContext<IContext>({
@@ -27,6 +29,8 @@ export const Context = createContext<IContext>({
   setShowAllBoards: () => {},
   boardName: "",
   setBoardName: () => {},
+  showAddNewBoard: false,
+  setShowAddNewBoard: () => {},
 });
 
 function App() {
@@ -39,10 +43,11 @@ function App() {
     if (!localST) {
       localStorage.setItem("boards", JSON.stringify(jsonBoards));
     }
-  }, []);
+  }, [jsonBoards]);
   const [showAllBoards, setShowAllBoards] = useState(false);
   const [boardName, setBoardName] = useState("");
-  console.log(darkMode);
+  const [showAddNewBoard, setShowAddNewBoard] = useState(false);
+
   return (
     <Context.Provider
       value={{
@@ -54,6 +59,8 @@ function App() {
         setShowAllBoards,
         boardName,
         setBoardName,
+        showAddNewBoard,
+        setShowAddNewBoard,
       }}
     >
       <Router>
