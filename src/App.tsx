@@ -1,46 +1,42 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.css";
-import BoardPage from "./pages/BoardPage";
-import Home from "./pages/Home";
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Data from "./data.json";
 import { IData } from "./dataTypes";
 import Header from "./components/Header";
 import AllBoards from "./components/AllBoardsModal";
+import BoardPage from "./pages/BoardPage";
+import Home from "./pages/Home";
 
 export interface IContext {
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-  jsonBoards: IData[];
-  setJsonBoards: React.Dispatch<React.SetStateAction<IData[]>>;
+  jsonBoards: IData;
+  setJsonBoards: React.Dispatch<React.SetStateAction<IData>>;
   showAllBoards: boolean;
   setShowAllBoards: React.Dispatch<React.SetStateAction<boolean>>;
+  boardName: string;
+  setBoardName: React.Dispatch<React.SetStateAction<string>>;
 }
+
 export const Context = createContext<IContext>({
   darkMode: false,
   setDarkMode: () => {},
-  jsonBoards: [],
+  jsonBoards: { boards: [] },
   setJsonBoards: () => {},
   showAllBoards: false,
   setShowAllBoards: () => {},
+  boardName: "",
+  setBoardName: () => {},
 });
+
 function App() {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("mode") === "dark"
   );
-  const [jsonBoards, setJsonBoards] = useState<IData[]>([Data]);
+  const [jsonBoards, setJsonBoards] = useState<IData>(Data);
   const [showAllBoards, setShowAllBoards] = useState(false);
-  console.log(jsonBoards);
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: `/:boardName`,
-      element: <BoardPage />,
-    },
-  ]);
+  const [boardName, setBoardName] = useState("");
+  console.log(darkMode);
   return (
     <Context.Provider
       value={{
@@ -50,11 +46,18 @@ function App() {
         setJsonBoards,
         showAllBoards,
         setShowAllBoards,
+        boardName,
+        setBoardName,
       }}
     >
-      <Header />
-      <AllBoards />
-      <RouterProvider router={router} />;
+      <Router>
+        <Header />
+        <AllBoards />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:boardName" element={<BoardPage />} />
+        </Routes>
+      </Router>
     </Context.Provider>
   );
 }

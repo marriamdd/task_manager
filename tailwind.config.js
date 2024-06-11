@@ -5,10 +5,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        lightBG: "var(--background)",
-        darkBG: "var(--background)",
+        lightBG: "#F4F7FD",
+        darkBG: "#2B2C37",
         contentLight: "#fff",
         contentDark: "var(--background)",
+        purple: "#635FC7",
+        medium_Grey: "#828FA3",
       },
     },
   },
