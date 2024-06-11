@@ -2,10 +2,10 @@ import React, { createContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Data from "./data.json";
 import { IData } from "./dataTypes";
-import Header from "./components/Header";
-import AllBoards from "./components/AllBoardsModal";
+
 import BoardPage from "./pages/BoardPage";
 import Home from "./pages/Home";
+import Layout from "./layouts/Layout";
 
 export interface IContext {
   darkMode: boolean;
@@ -51,11 +51,11 @@ function App() {
       }}
     >
       <Router>
-        <Header />
-        <AllBoards />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/:boardName" element={<BoardPage />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/:boardName" element={<BoardPage />} />
+          </Route>
         </Routes>
       </Router>
     </Context.Provider>

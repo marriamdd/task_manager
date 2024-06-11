@@ -5,9 +5,9 @@ function Home() {
   const { darkMode } = useContext(Context);
   console.log(darkMode);
   return (
-    <div className={`${darkMode ? "dark" : ""}`}>
+    <div className="h-[100vh] dark:bg-bodyDarkBG ">
       Home
-      <div className={"bg-lightBG dark:bg-darkBG"}>ragvac</div>
+      <div className={"bg-lightBG dark:bg-contentDarkBG"}>ragvac</div>
     </div>
   );
 }

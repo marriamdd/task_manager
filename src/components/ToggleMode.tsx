@@ -10,7 +10,7 @@ const ToggleMode: React.FC = () => {
   }, [darkMode]);
 
   return (
-    <div className="w-[23.5rem] h-[4.8rem] rounded-md ml-[1rem] mb-[1rem] bg-lightBG dark:bg-darkBG flex justify-center gap-[2rem] items-center ">
+    <div className="w-[23.5rem] h-[4.8rem] rounded-md ml-[1rem] my-[1rem] bg-lightBG dark:bg-bodyDarkBG flex justify-center gap-[2rem] items-center ">
       <img className="w-[2rem] h-[2rem]" src={Sun} alt="sun_icon" />
       <div
         className="w-[4rem] h-[2rem] rounded-[1.2rem] bg-purple flex flex-row items-center px-[0.5rem]"

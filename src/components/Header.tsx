@@ -6,7 +6,7 @@ function Header() {
   return (
     <div
       onClick={() => setShowAllBoards((prev) => !prev)}
-      className="w-[37.5rem] h-[6.4rem] bg-contentLight dark:contentDark "
+      className="w-[37.5rem] h-[6.4rem] bg-contentLight dark:bg-contentDark "
     >
       Platform Launch
     </div>
