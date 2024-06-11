@@ -27,11 +27,22 @@ function CreateNewBoard() {
       name: data.name,
       columns: data.columns.map((column: { columnsName: string }) => ({
         name: column.columnsName,
-        tasks: [],
-        color: "",
-        id: (Math.random() * 100000).toFixed(0),
+        tasks: [
+          {
+            title: "",
+            description: "",
+            status: "",
+            subtasks: [
+              {
+                title: "",
+                isCompleted: false,
+              },
+            ],
+          },
+        ],
       })),
     };
+
     const updatedBoards = {
       ...jsonBoards,
       boards: [...jsonBoards.boards, newdata],
