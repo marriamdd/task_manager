@@ -72,6 +72,7 @@ function CreateNewBoard() {
                 </p>
               )}
               <button
+                className="ml-[1rem]"
                 disabled={fields.length === 1}
                 type="button"
                 onClick={() => remove(index)}
@@ -82,10 +83,19 @@ function CreateNewBoard() {
           ))}
         </div>
 
-        <button type="button" onClick={() => append({ columnsName: "" })}>
-          Add Column
+        <button
+          className="text-[1.3rem] text-purple  font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
+          type="button"
+          onClick={() => append({ columnsName: "" })}
+        >
+          + Add New Column
         </button>
-        <button type="submit">Submit</button>
+        <button
+          className="w-[29.5rem] h-[4rem] text-[1.3rem] text-[white] font-[700] rounded-[2rem] bg-purple"
+          type="submit"
+        >
+          Create New Board
+        </button>
       </form>
     </div>
   );

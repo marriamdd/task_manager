@@ -12,6 +12,9 @@ html {
   background-color: #f4f7fd;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
+button {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
 
 .light {
   --background: #f4f7fd;
