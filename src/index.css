@@ -4,6 +4,7 @@
 
 html {
   font-size: 62.5%;
+  background-color: #f4f7fd;
 }
 
 .light {
@@ -11,4 +12,10 @@ html {
 }
 .dark {
   --background: #20212c;
+}
+.contentLight {
+  --background: #fff;
+}
+.contentDark {
+  --background: #2b2c37;
 }

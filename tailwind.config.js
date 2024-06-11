@@ -7,6 +7,8 @@ export default {
       colors: {
         lightBG: "var(--background)",
         darkBG: "var(--background)",
+        contentLight: "#fff",
+        contentDark: "var(--background)",
       },
     },
   },
