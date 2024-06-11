@@ -3,6 +3,7 @@ import "./App.css";
 import BoardPage from "./pages/BoardPage";
 import Home from "./pages/Home";
 import { createContext, useState } from "react";
+
 export interface IContext {
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
