@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Data from "./data.json";
 import { IData } from "./dataTypes";
@@ -34,6 +34,12 @@ function App() {
     localStorage.getItem("mode") === "dark"
   );
   const [jsonBoards, setJsonBoards] = useState<IData>(Data);
+  useEffect(() => {
+    const localST = localStorage.getItem("boards");
+    if (!localST) {
+      localStorage.setItem("boards", JSON.stringify(jsonBoards));
+    }
+  }, []);
   const [showAllBoards, setShowAllBoards] = useState(false);
   const [boardName, setBoardName] = useState("");
   console.log(darkMode);
