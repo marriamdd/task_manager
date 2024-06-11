@@ -1,5 +1,7 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import Cross from "../assets/icon-cross.svg";
+import { useContext } from "react";
+import { Context } from "../App";
 function CreateNewBoard() {
   const {
     register,
@@ -14,10 +16,32 @@ function CreateNewBoard() {
     },
   });
 
-  const onSubmit = (data) => {
+  const { setShowAddNewBoard, setShowAllBoards, jsonBoards, setJsonBoards } =
+    useContext(Context);
+  const onSubmit = (data: {
+    name: string;
+    columns: { columnsName: string }[];
+  }) => {
     console.log(data);
-  };
+    const newdata = {
+      name: data.name,
+      columns: data.columns.map((column: { columnsName: string }) => ({
+        name: column.columnsName,
+        tasks: [],
+        color: "",
+        id: (Math.random() * 100000).toFixed(0),
+      })),
+    };
+    const updatedBoards = {
+      ...jsonBoards,
+      boards: [...jsonBoards.boards, newdata],
+    };
 
+    setJsonBoards(updatedBoards);
+    localStorage.setItem("boards", JSON.stringify(updatedBoards));
+    setShowAddNewBoard(false);
+    setShowAllBoards(false);
+  };
   const { fields, append, remove } = useFieldArray({
     control,
     name: "columns",

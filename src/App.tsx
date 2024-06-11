@@ -42,6 +42,9 @@ function App() {
     const localST = localStorage.getItem("boards");
     if (!localST) {
       localStorage.setItem("boards", JSON.stringify(jsonBoards));
+    } else {
+      const storage = JSON.parse(localST);
+      setJsonBoards(storage);
     }
   }, [jsonBoards]);
   const [showAllBoards, setShowAllBoards] = useState(false);
