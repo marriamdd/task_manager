@@ -48,7 +48,7 @@ function App() {
     }
   }, []);
   const [showAllBoards, setShowAllBoards] = useState(false);
-  const [boardName, setBoardName] = useState("");
+  const [boardName, setBoardName] = useState(jsonBoards.boards[0].name);
   const [showAddNewBoard, setShowAddNewBoard] = useState(false);
 
   return (
