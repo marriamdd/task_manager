@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { Context } from "../App";
 import PurpleBoardIcon from "../assets/fluent_board-split-24-regular.svg";
 function BoardsRendering() {
-  const { jsonBoards, boardName, setShowAddNewBoard } = useContext(Context);
+  const { jsonBoards, boardName, setShowAddNewBoard, setShowAllBoards } =
+    useContext(Context);
 
   return (
     <>
@@ -25,7 +26,13 @@ function BoardsRendering() {
             src={BoardIcon}
             alt="BoardIcon"
           />
-          <Link to={`/${board.name}`}>
+          <Link
+            onClick={() => {
+              setShowAddNewBoard(false);
+              setShowAllBoards(false);
+            }}
+            to={`/${board.name}`}
+          >
             <h2>{board.name}</h2>
           </Link>
         </div>

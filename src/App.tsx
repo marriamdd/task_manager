@@ -46,7 +46,7 @@ function App() {
       const storage = JSON.parse(localST);
       setJsonBoards(storage);
     }
-  }, [jsonBoards]);
+  }, []);
   const [showAllBoards, setShowAllBoards] = useState(false);
   const [boardName, setBoardName] = useState("");
   const [showAddNewBoard, setShowAddNewBoard] = useState(false);
