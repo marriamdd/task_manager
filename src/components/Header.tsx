@@ -17,7 +17,7 @@ function Header() {
         >
           <img src={Logo} alt="Logo" />
           <div
-            className="flex items-center gap-[0.9rem]"
+            className="flex items-center gap-[0.9rem] cursor-pointer"
             onClick={() => {
               setShowAllBoards((prev) => !prev);
               setShowAddNewBoard(false);
@@ -25,7 +25,7 @@ function Header() {
           >
             <h1 className="text-[1.8rem] font-[700]"> {boardName}</h1>
             <img
-              className={`${!showAllBoards ? "hidden" : "visible"}`}
+              className={`${!showAllBoards ? "hidden" : "visible"} `}
               src={ArrowUp}
               alt="ArrowUp"
             />
@@ -40,7 +40,7 @@ function Header() {
           <button className="w-[4.8rem] h-[3.2rem] bg-purple rounded-[2.4rem] flex items-center justify-center">
             <img src={Plus} alt="Plus" />
           </button>
-          <img src={Dots} alt="more_icon" />
+          <img className="cursor-pointer" src={Dots} alt="more_icon" />
         </div>
       </div>
     </div>

@@ -1,9 +1,19 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   dark: "class",
   theme: {
     extend: {
+      scrollbar: {
+        width: "20px",
+        height: "20px",
+        track: "bg-gray-200",
+        thumb: "bg-gray-600",
+        hover: {
+          thumb: "bg-gray-700",
+        },
+      },
       colors: {
         contentLight: "#fff",
 

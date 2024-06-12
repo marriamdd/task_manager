@@ -14,6 +14,7 @@ html {
 }
 button {
   font-family: "Plus Jakarta Sans", sans-serif;
+  cursor: pointer;
 }
 
 .light {
@@ -27,4 +28,15 @@ button {
 }
 .contentDark {
   --background: #2b2c37;
+}
+.scrollbar::-webkit-scrollbar {
+  height: 13px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: rgb(227, 228, 241);
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
