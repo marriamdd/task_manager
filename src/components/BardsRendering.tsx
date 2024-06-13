@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import { Context } from "../App";
 import PurpleBoardIcon from "../assets/fluent_board-split-24-regular.svg";
 function BoardsRendering() {
-  const { jsonBoards, boardName, setShowAddNewBoard, setShowAllBoards } =
-    useContext(Context);
+  const {
+    jsonBoards,
+    boardName,
+    setShowAddNewBoard,
+    setShowEditBoard,
+    setShowAllBoards,
+  } = useContext(Context);
 
   return (
     <>
@@ -47,7 +52,13 @@ function BoardsRendering() {
           src={PurpleBoardIcon}
           alt="BoardIcon"
         />
-        <h2 onClick={() => setShowAddNewBoard(true)} className=" text-purple">
+        <h2
+          onClick={() => {
+            setShowAddNewBoard(true);
+            setShowEditBoard(false);
+          }}
+          className=" text-purple"
+        >
           + Create New Board
         </h2>
       </div>

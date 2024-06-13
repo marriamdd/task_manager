@@ -6,21 +6,30 @@ import ArrowUp from "../assets/icon-chevron-up.svg";
 import Plus from "../assets/icon-add-task-mobile.svg";
 import Dots from "../assets/icon-vertical-ellipsis.svg";
 function Header() {
-  const { setShowAllBoards, setShowAddNewBoard, boardName, showAllBoards } =
-    useContext(Context);
+  const {
+    setShowAllBoards,
+    setShowAddNewBoard,
+    boardName,
+    showAllBoards,
+    setShowEditBoard,
+  } = useContext(Context);
   return (
     <div className=" h-[6.4rem] bg-contentLight flex px-[2rem] ">
       <div className="flex w-[100%] justify-between items-center gap-[1rem]  ">
         <div
-          className="flex items-center gap-[0.9rem]
+          className="flex items-center gap-[0.9rem] md:space-x-4
         "
         >
           <img src={Logo} alt="Logo" />
+          <h3 className="hidden md:inline-block font-bold md:text-4xl">
+            Kanban
+          </h3>
           <div
             className="flex items-center gap-[0.9rem] cursor-pointer"
             onClick={() => {
               setShowAllBoards((prev) => !prev);
               setShowAddNewBoard(false);
+              setShowEditBoard(false);
             }}
           >
             <h1 className="text-[1.8rem] font-[700]"> {boardName}</h1>
@@ -37,8 +46,11 @@ function Header() {
           </div>
         </div>
         <div className="flex items-center gap-[1rem]">
-          <button className="w-[4.8rem] h-[3.2rem] bg-purple rounded-[2.4rem] flex items-center justify-center">
+          <button className=" md:hidden button px-[2rem] py-[1.3rem]">
             <img src={Plus} alt="Plus" />
+          </button>
+          <button className="hidden  md:block lg:block xl:block button px-[2rem] py-[1.3rem]">
+            + Add New Task
           </button>
           <img className="cursor-pointer" src={Dots} alt="more_icon" />
         </div>

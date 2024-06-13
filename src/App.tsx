@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Data from "./data.json";
-import { IData } from "./dataTypes";
+import { Board, IData } from "./dataTypes";
 
 import BoardPage from "./pages/BoardPage";
 import Home from "./pages/Home";
@@ -18,6 +18,10 @@ export interface IContext {
   setBoardName: React.Dispatch<React.SetStateAction<string>>;
   showAddNewBoard: boolean;
   setShowAddNewBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  showEditBoard: boolean;
+  setShowEditBoard: React.Dispatch<React.SetStateAction<boolean>>;
+  currentPage: Board | null;
+  setCurrentPage: React.Dispatch<React.SetStateAction<Board | null>>;
 }
 
 export const Context = createContext<IContext>({
@@ -31,6 +35,10 @@ export const Context = createContext<IContext>({
   setBoardName: () => {},
   showAddNewBoard: false,
   setShowAddNewBoard: () => {},
+  showEditBoard: false,
+  setShowEditBoard: () => {},
+  currentPage: null,
+  setCurrentPage: () => {},
 });
 
 function App() {
@@ -38,6 +46,12 @@ function App() {
     localStorage.getItem("mode") === "dark"
   );
   const [jsonBoards, setJsonBoards] = useState<IData>(Data);
+
+  const [showAllBoards, setShowAllBoards] = useState(false);
+  const [boardName, setBoardName] = useState("");
+  const [showAddNewBoard, setShowAddNewBoard] = useState(false);
+  const [showEditBoard, setShowEditBoard] = useState(false);
+  const [currentPage, setCurrentPage] = useState<Board | null>(null);
   useEffect(() => {
     const localST = localStorage.getItem("boards");
     if (!localST) {
@@ -46,14 +60,14 @@ function App() {
       const storage = JSON.parse(localST);
       setJsonBoards(storage);
     }
-  }, []);
-  const [showAllBoards, setShowAllBoards] = useState(false);
-  const [boardName, setBoardName] = useState("");
-  const [showAddNewBoard, setShowAddNewBoard] = useState(false);
-
+  }, [showEditBoard]);
   return (
     <Context.Provider
       value={{
+        currentPage,
+        setCurrentPage,
+        showEditBoard,
+        setShowEditBoard,
         darkMode,
         setDarkMode,
         jsonBoards,

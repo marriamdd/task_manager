@@ -6,8 +6,14 @@ import ToggleMode from "./ToggleMode";
 import CreateNewBoard from "./CreateNewBoard";
 
 function AllBoards() {
-  const { showAllBoards, jsonBoards, darkMode, showAddNewBoard } =
-    useContext(Context);
+  const {
+    showAllBoards,
+    jsonBoards,
+    setShowAddNewBoard,
+    darkMode,
+    showAddNewBoard,
+    setShowAllBoards,
+  } = useContext(Context);
   const portalContainer = document.getElementById("portal") as Element;
   if (!showAllBoards) {
     return null;
@@ -15,7 +21,13 @@ function AllBoards() {
 
   return ReactDOM.createPortal(
     <div className={`${darkMode ? "dark" : ""} relative `}>
-      <div className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"></div>
+      <div
+        onClick={() => {
+          setShowAddNewBoard(false);
+          setShowAllBoards(false);
+        }}
+        className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
+      ></div>
       {!showAddNewBoard ? (
         <div className="fixed top-[15%]  ease left-[15%]  z-10 w-[26.4rem] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]">
           <div className=" h-[100%]">
@@ -26,9 +38,7 @@ function AllBoards() {
           </div>
         </div>
       ) : (
-        <div className="fixed top-[30%] left-[4%]  z-10 w-[34.3rem] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]">
-          <CreateNewBoard />
-        </div>
+        <CreateNewBoard />
       )}
     </div>,
     portalContainer

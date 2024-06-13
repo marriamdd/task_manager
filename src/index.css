@@ -40,3 +40,16 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+@layer components {
+  .button {
+    background-color: #635fc7;
+    font-size: 15px;
+    border-radius: 24px;
+    color: white;
+    font: bold;
+  }
+  .button:hover {
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
+  }
+}

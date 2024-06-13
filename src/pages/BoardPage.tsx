@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../App";
+import CreateNewBoard from "../components/CreateNewBoard";
 
 function BoardPage() {
   const { boardName } = useParams();
@@ -26,14 +27,24 @@ function BoardPage() {
     "#FFA07A",
     "#FF00FF",
   ];
-  const { setBoardName, jsonBoards } = useContext(Context);
+  const {
+    setBoardName,
+    jsonBoards,
+    setShowEditBoard,
+    showEditBoard,
+    setCurrentPage,
+    currentPage,
+  } = useContext(Context);
   if (boardName) {
     setBoardName(boardName);
   }
+  useEffect(() => {
+    // Find the current board by name
+    const currentBoard =
+      jsonBoards.boards.find((item) => item.name === boardName) || null;
+    setCurrentPage(currentBoard);
+  }, [jsonBoards, boardName]);
 
-  const currentPage = jsonBoards.boards.find((item) => item.name === boardName);
-
-  console.log(currentPage);
   return (
     <>
       <div className="scrollbar flex gap-[2rem] px-[1.5rem] py-[2rem] w-full overflow-x-scroll ">
@@ -51,11 +62,13 @@ function BoardPage() {
               ></div>
               <h2 className="text-medium_Grey text-[1.8rem] w-[28rem] pb-[1rem]">{`${currentPage?.columns[index]?.name} (${currentPage?.columns[index]?.tasks.length}) `}</h2>
             </div>
-            {item.tasks.map((m) => (
-              <div className=" cursor-pointer w-[28.8rem] px-[1.6rem] py-[2.3rem] mb-[1rem]  rounded-[0.8rem] bg-contentLight dark:bg-contentDarkBG">
-                <p>{m.title}</p>
-              </div>
-            ))}
+            <div onClick={() => setShowEditBoard(true)}>
+              {item.tasks.map((m) => (
+                <div className=" cursor-pointer w-[28.8rem] px-[1.6rem] py-[2.3rem] mb-[1rem]  rounded-[0.8rem] bg-contentLight dark:bg-contentDarkBG">
+                  <p>{m.title}</p>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
 
@@ -65,6 +78,7 @@ function BoardPage() {
           </h2>
         </div>
       </div>
+      {showEditBoard && <CreateNewBoard />}
     </>
   );
 }
