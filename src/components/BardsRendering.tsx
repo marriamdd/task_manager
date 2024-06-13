@@ -9,7 +9,7 @@ function BoardsRendering() {
     boardName,
     setShowAddNewBoard,
     setShowEditBoard,
-    setShowAllBoards,
+    setShowHeaderDropdown,
   } = useContext(Context);
 
   return (
@@ -34,7 +34,7 @@ function BoardsRendering() {
           <Link
             onClick={() => {
               setShowAddNewBoard(false);
-              setShowAllBoards(false);
+              setShowHeaderDropdown(false);
             }}
             to={`/${board.name}`}
           >

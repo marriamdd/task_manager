@@ -7,10 +7,10 @@ import Plus from "../assets/icon-add-task-mobile.svg";
 import Dots from "../assets/icon-vertical-ellipsis.svg";
 function Header() {
   const {
-    setShowAllBoards,
+    setShowHeaderDropdown,
     setShowAddNewBoard,
     boardName,
-    showAllBoards,
+    showHeaderDropdown,
     setShowEditBoard,
   } = useContext(Context);
   return (
@@ -27,19 +27,19 @@ function Header() {
           <div
             className="flex items-center gap-[0.9rem] cursor-pointer"
             onClick={() => {
-              setShowAllBoards((prev) => !prev);
+              setShowHeaderDropdown((prev) => !prev);
               setShowAddNewBoard(false);
               setShowEditBoard(false);
             }}
           >
             <h1 className="text-[1.8rem] font-[700]"> {boardName}</h1>
             <img
-              className={`${!showAllBoards ? "hidden" : "visible"} `}
+              className={`${!showHeaderDropdown ? "hidden" : "visible"} `}
               src={ArrowUp}
               alt="ArrowUp"
             />
             <img
-              className={`${showAllBoards ? "hidden" : "visible"} `}
+              className={`${showHeaderDropdown ? "hidden" : "visible"} `}
               src={ArrowDown}
               alt="ArrowDown"
             />

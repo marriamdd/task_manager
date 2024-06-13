@@ -17,7 +17,7 @@ function CreateNewBoard() {
 
   const {
     setShowAddNewBoard,
-    setShowAllBoards,
+    setShowHeaderDropdown,
     jsonBoards,
     setJsonBoards,
     boardName,
@@ -80,7 +80,7 @@ function CreateNewBoard() {
     setJsonBoards(updatedBoards);
     localStorage.setItem("boards", JSON.stringify(updatedBoards));
     setShowAddNewBoard(false);
-    setShowAllBoards(false);
+    setShowHeaderDropdown(false);
     setShowEditBoard(false);
     // setCurrentPage(null);
     setBoardName(newData.name); // Update the board name in context
@@ -96,7 +96,7 @@ function CreateNewBoard() {
       <div
         onClick={() => {
           setShowAddNewBoard(false);
-          setShowAllBoards(false);
+          setShowHeaderDropdown(false);
           setShowEditBoard(false);
         }}
         className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"

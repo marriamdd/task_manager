@@ -1,30 +1,30 @@
 import { useContext } from "react";
 import { Context } from "../App";
-import ReactDOM from "react-dom";
+
 import BoardsRendering from "./BardsRendering";
 import ToggleMode from "./ToggleMode";
 import CreateNewBoard from "./CreateNewBoard";
 
-function AllBoards() {
+function HeaderDropdown() {
   const {
-    showAllBoards,
+    showHeaderDropdown,
     jsonBoards,
     setShowAddNewBoard,
     darkMode,
     showAddNewBoard,
-    setShowAllBoards,
+    setShowHeaderDropdown,
   } = useContext(Context);
-  const portalContainer = document.getElementById("portal") as Element;
-  if (!showAllBoards) {
+
+  if (!showHeaderDropdown) {
     return null;
   }
 
-  return ReactDOM.createPortal(
+  return (
     <div className={`${darkMode ? "dark" : ""} relative `}>
       <div
         onClick={() => {
           setShowAddNewBoard(false);
-          setShowAllBoards(false);
+          setShowHeaderDropdown(false);
         }}
         className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
@@ -40,9 +40,8 @@ function AllBoards() {
       ) : (
         <CreateNewBoard />
       )}
-    </div>,
-    portalContainer
+    </div>
   );
 }
 
-export default AllBoards;
+export default HeaderDropdown;

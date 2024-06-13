@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../App";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
-import AllBoards from "../components/AllBoardsModal";
+import HeaderDropdown from "../components/HeaderDropdown";
 
 function Layout() {
   const { darkMode } = useContext(Context);
@@ -10,7 +10,7 @@ function Layout() {
   return (
     <div className={darkMode ? "dark" : ""}>
       <Header />
-      <AllBoards />
+      <HeaderDropdown />
       <Outlet />
     </div>
   );

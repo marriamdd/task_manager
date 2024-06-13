@@ -12,8 +12,8 @@ export interface IContext {
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
   jsonBoards: IData;
   setJsonBoards: React.Dispatch<React.SetStateAction<IData>>;
-  showAllBoards: boolean;
-  setShowAllBoards: React.Dispatch<React.SetStateAction<boolean>>;
+  showHeaderDropdown: boolean;
+  setShowHeaderDropdown: React.Dispatch<React.SetStateAction<boolean>>;
   boardName: string;
   setBoardName: React.Dispatch<React.SetStateAction<string>>;
   showAddNewBoard: boolean;
@@ -29,8 +29,8 @@ export const Context = createContext<IContext>({
   setDarkMode: () => {},
   jsonBoards: { boards: [] },
   setJsonBoards: () => {},
-  showAllBoards: false,
-  setShowAllBoards: () => {},
+  showHeaderDropdown: false,
+  setShowHeaderDropdown: () => {},
   boardName: "",
   setBoardName: () => {},
   showAddNewBoard: false,
@@ -47,7 +47,7 @@ function App() {
   );
   const [jsonBoards, setJsonBoards] = useState<IData>(Data);
 
-  const [showAllBoards, setShowAllBoards] = useState(false);
+  const [showHeaderDropdown, setShowHeaderDropdown] = useState(false);
   const [boardName, setBoardName] = useState("");
   const [showAddNewBoard, setShowAddNewBoard] = useState(false);
   const [showEditBoard, setShowEditBoard] = useState(false);
@@ -72,8 +72,8 @@ function App() {
         setDarkMode,
         jsonBoards,
         setJsonBoards,
-        showAllBoards,
-        setShowAllBoards,
+        showHeaderDropdown,
+        setShowHeaderDropdown,
         boardName,
         setBoardName,
         showAddNewBoard,
