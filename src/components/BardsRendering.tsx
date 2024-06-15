@@ -13,11 +13,11 @@ function BoardsRendering() {
   } = useContext(Context);
 
   return (
-    <>
+    <div className="max-h-[60vh] overflow-y-scroll">
       {jsonBoards.boards.map((board, index) => (
         <div
           style={{ borderRadius: "0px 100px 100px 0px" }}
-          className={`flex gap-[2rem] mb-[0.5rem] w-[24rem] h-[4.8rem] font-[700] text-[1.5rem]  py-[1rem] px-[1.5rem] items-center 
+          className={`flex gap-[2rem] mb-[0.5rem] w-[24rem]   font-[700] text-[1.5rem]  py-[1rem] px-[1.5rem] items-center 
             ${
               boardName === board.name
                 ? "bg-purple text-[#FFF] "
@@ -62,7 +62,7 @@ function BoardsRendering() {
           + Create New Board
         </h2>
       </div>
-    </>
+    </div>
   );
 }
 

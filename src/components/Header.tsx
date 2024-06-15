@@ -12,6 +12,7 @@ function Header() {
     boardName,
     showHeaderDropdown,
     setShowEditBoard,
+    setShowAddNewTask,
   } = useContext(Context);
   return (
     <div className=" h-[6.4rem] bg-contentLight flex px-[2rem] ">
@@ -45,11 +46,14 @@ function Header() {
             />
           </div>
         </div>
-        <div className="flex items-center gap-[1rem]">
+        <div
+          onClick={() => setShowAddNewTask((prev) => !prev)}
+          className="flex items-center gap-[1rem]"
+        >
           <button className=" md:hidden button px-[2rem] py-[1.3rem]">
             <img src={Plus} alt="Plus" />
           </button>
-          <button className="hidden  md:block lg:block xl:block button px-[2rem] py-[1.3rem]">
+          <button className="hidden  md:block  button px-[2rem] py-[1.3rem]">
             + Add New Task
           </button>
           <img className="cursor-pointer" src={Dots} alt="more_icon" />

@@ -1,7 +1,17 @@
-import { useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm, FieldValues } from "react-hook-form";
 import Cross from "../assets/icon-cross.svg";
 import { useContext, useEffect } from "react";
 import { Context } from "../App";
+
+// Define the type for form fields
+interface Column {
+  columnsName: string;
+}
+
+interface FormData extends FieldValues {
+  name: string;
+  columns: Column[];
+}
 
 function CreateNewBoard() {
   const {
@@ -11,8 +21,12 @@ function CreateNewBoard() {
     reset,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormData>({
     mode: "all",
+    defaultValues: {
+      name: "",
+      columns: [{ columnsName: "" }],
+    },
   });
 
   const {
@@ -45,7 +59,7 @@ function CreateNewBoard() {
     }
   }, [showAddNewBoard, showEditBoard, currentPage, reset, setValue]);
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormData) => {
     const newData = {
       name: data.name,
       columns: data.columns.map((column, index) => ({
@@ -64,13 +78,12 @@ function CreateNewBoard() {
         ...jsonBoards,
         boards: jsonBoards.boards.map((board) => {
           if (board.name === currentPage.name) {
-            return newData;
+            return { ...board, ...newData };
           }
           return board;
         }),
       };
     } else {
-      // Create new board
       updatedBoards = {
         ...jsonBoards,
         boards: [...jsonBoards.boards, newData],
@@ -82,8 +95,8 @@ function CreateNewBoard() {
     setShowAddNewBoard(false);
     setShowHeaderDropdown(false);
     setShowEditBoard(false);
-    // setCurrentPage(null);
-    setBoardName(newData.name); // Update the board name in context
+
+    setBoardName(newData.name);
   };
 
   const { fields, append, remove } = useFieldArray({
@@ -102,9 +115,8 @@ function CreateNewBoard() {
         className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed ${
-          showEditBoard ? "top-[20%]" : "top-[30%]"
-        } left-[4%]  z-10 w-[34.3rem] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+        className={`fixed  top-[20%]
+           left-[4%] max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex flex-col gap-[2rem] py-[1rem] px-[2rem]">
           <h2 className="text-[1.8rem] font-[700]">
@@ -139,7 +151,7 @@ function CreateNewBoard() {
               {fields.map((column, index) => (
                 <div
                   key={column.id}
-                  className="flex items-center gap-[0.5rem] relative"
+                  className="flex  items-center gap-[0.5rem] relative "
                 >
                   <input
                     className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1rem] border border-solid border-gray-400 border-opacity-25"
@@ -150,16 +162,18 @@ function CreateNewBoard() {
                       required: { value: true, message: "Can’t be empty" },
                     })}
                   />
-                  {/* {errors.columns?.[index]?.columnsName && (
-                <p className="text-red-500 absolute right-[5rem]">
-                  Can’t be empty
-                </p>
-              )} */}
+                  {Array.isArray(errors.columns) &&
+                    errors.columns[index]?.columnsName && (
+                      <p className="text-red-500 absolute right-[5rem]">
+                        Can’t be empty
+                      </p>
+                    )}
+
                   <button
                     className="ml-[1rem]"
-                    disabled={fields.length === 1}
                     type="button"
                     onClick={() => remove(index)}
+                    disabled={fields.length === 1}
                   >
                     <img src={Cross} alt="remove" />
                   </button>

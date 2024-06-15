@@ -22,6 +22,8 @@ export interface IContext {
   setShowEditBoard: React.Dispatch<React.SetStateAction<boolean>>;
   currentPage: Board | null;
   setCurrentPage: React.Dispatch<React.SetStateAction<Board | null>>;
+  showAddNewTask: boolean;
+  setShowAddNewTask: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Context = createContext<IContext>({
@@ -39,6 +41,8 @@ export const Context = createContext<IContext>({
   setShowEditBoard: () => {},
   currentPage: null,
   setCurrentPage: () => {},
+  showAddNewTask: false,
+  setShowAddNewTask: () => {},
 });
 
 function App() {
@@ -52,6 +56,7 @@ function App() {
   const [showAddNewBoard, setShowAddNewBoard] = useState(false);
   const [showEditBoard, setShowEditBoard] = useState(false);
   const [currentPage, setCurrentPage] = useState<Board | null>(null);
+  const [showAddNewTask, setShowAddNewTask] = useState(false);
   useEffect(() => {
     const localST = localStorage.getItem("boards");
     if (!localST) {
@@ -78,6 +83,8 @@ function App() {
         setBoardName,
         showAddNewBoard,
         setShowAddNewBoard,
+        showAddNewTask,
+        setShowAddNewTask,
       }}
     >
       <Router>
