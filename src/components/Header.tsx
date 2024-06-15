@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Logo from "../assets/logo-mobile.svg";
 import { Context } from "../App";
 import ArrowDown from "../assets/icon-chevron-down.svg";
@@ -14,6 +14,7 @@ function Header() {
     setShowEditBoard,
     setShowAddNewTask,
   } = useContext(Context);
+  const [options, setOptions] = useState(false);
   return (
     <div className=" h-[6.4rem] bg-contentLight flex px-[2rem] ">
       <div className="flex w-[100%] justify-between items-center gap-[1rem]  ">
@@ -56,7 +57,20 @@ function Header() {
           <button className="hidden  md:block  button px-[2rem] py-[1.3rem]">
             + Add New Task
           </button>
-          <img className="cursor-pointer" src={Dots} alt="more_icon" />
+          <div className="flex flex-col items-center relative ">
+            <img
+              onClick={() => setOptions(!options)}
+              className="cursor-pointer "
+              src={Dots}
+              alt="more_icon"
+            />
+            {options && (
+              <div className="absolute top-[5rem] w-[80px] right-[2rem] bg-[red]">
+                <h2 onClick={() => setShowEditBoard(true)}>Edit Board</h2>
+                <h2>Delete Board</h2>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

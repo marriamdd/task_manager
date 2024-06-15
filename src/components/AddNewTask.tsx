@@ -1,22 +1,53 @@
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { Context } from "../App";
 
+import Cross from "../assets/icon-cross.svg";
 interface ITask {
   title: string;
   description: string;
-  subtasks: string[];
+  subtasks: { subtaskName: string }[];
 }
 export default function AddNewTask() {
-  const { setShowAddNewTask, showAddNewTask } = useContext(Context);
-  const { register, setValue, setError, control } = useForm<ITask>();
+  const { setShowAddNewTask, showAddNewTask, currentPage, showEditTask } =
+    useContext(Context);
+
+  const {
+    register,
+    // setValue,
+    // setError,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ITask>({
+    mode: "all",
+    defaultValues: {
+      //   title: "",
+      //   description: "",
+      subtasks: [{ subtaskName: "" }],
+    },
+  });
+  const { remove, append, fields } = useFieldArray({
+    control,
+    name: "subtasks",
+  });
+  const onSubmit = (data: ITask) => {
+    console.log(data);
+  };
   if (!showAddNewTask) return;
   return (
-    <div>
-      <h2>Add New Task</h2>
-      <form>
+    <div className="px-[2rem]">
+      <h2 className="text-[1.8rem] font-[700] my-[2rem]">
+        {!showEditTask ? "Add New Task" : "Edit task"}
+      </h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-[1.5rem]"
+      >
         <div className="flex flex-col gap-[0.5rem] ">
-          <label htmlFor="title">Title</label>
+          <label className="text-medium_Grey my-[0.5rem]" htmlFor="title">
+            Title
+          </label>
           <input
             className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
             id="title"
@@ -26,9 +57,12 @@ export default function AddNewTask() {
               required: { value: true, message: "Can’t be empty" },
             })}
           />
+          {errors.title && <p>{errors.title.message}</p>}
         </div>
         <div className="flex flex-col gap-[0.5rem] ">
-          <label htmlFor="description">Description</label>
+          <label className="text-medium_Grey my-[0.5rem]" htmlFor="description">
+            Description
+          </label>
           <textarea
             id="description"
             placeholder="e.g. It’s always good to take a break. This 
@@ -40,6 +74,42 @@ a little."
             })}
           ></textarea>
         </div>
+        <div>
+          {fields.map((item, index) => (
+            <div key={index}>
+              <input
+                className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
+                id={`subtasks:${index}`}
+                type="text"
+                placeholder="e.g. Make coffee"
+                {...register(`subtasks.${index}.subtaskName`, {
+                  required: { value: true, message: "Can’t be empty" },
+                })}
+              />
+              <button
+                className="ml-[1rem]"
+                type="button"
+                onClick={() => remove(index)}
+                disabled={fields.length === 1}
+              >
+                <img src={Cross} alt="remove" />
+              </button>
+              {errors.subtasks?.[index]?.subtaskName && (
+                <p>{errors.subtasks[index]?.subtaskName?.message}</p>
+              )}
+            </div>
+          ))}
+        </div>
+        <button
+          className="text-[1.3rem] text-purple  font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
+          type="button"
+          onClick={() => append({ subtaskName: "" })}
+        >
+          + Add New Subtask
+        </button>
+        <button type="submit" className="button">
+          Create Task
+        </button>
       </form>
     </div>
   );

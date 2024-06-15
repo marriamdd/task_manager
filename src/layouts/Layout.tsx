@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import HeaderDropdown from "../components/HeaderDropdown";
 import AddNewTask from "../components/AddNewTask";
+import Subtasks from "../components/Subtasks";
 
 function Layout() {
   const { darkMode } = useContext(Context);
@@ -13,6 +14,7 @@ function Layout() {
       <Header />
       <HeaderDropdown />
       <AddNewTask />
+      <Subtasks />
       <Outlet />
     </div>
   );

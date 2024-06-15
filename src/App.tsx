@@ -7,6 +7,13 @@ import BoardPage from "./pages/BoardPage";
 import Home from "./pages/Home";
 import Layout from "./layouts/Layout";
 
+export interface IShowSubtasks {
+  show: boolean;
+  taskTitle: string;
+  status: string;
+  subtasks: { title: string; isCompleted: boolean }[];
+}
+
 export interface IContext {
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,6 +31,10 @@ export interface IContext {
   setCurrentPage: React.Dispatch<React.SetStateAction<Board | null>>;
   showAddNewTask: boolean;
   setShowAddNewTask: React.Dispatch<React.SetStateAction<boolean>>;
+  showEditTask: boolean;
+  setShowEditTask: React.Dispatch<React.SetStateAction<boolean>>;
+  showSubtasks: IShowSubtasks;
+  setShowSubtasks: React.Dispatch<React.SetStateAction<IShowSubtasks>>;
 }
 
 export const Context = createContext<IContext>({
@@ -43,6 +54,15 @@ export const Context = createContext<IContext>({
   setCurrentPage: () => {},
   showAddNewTask: false,
   setShowAddNewTask: () => {},
+  showEditTask: false,
+  setShowEditTask: () => {},
+  showSubtasks: {
+    show: false,
+    taskTitle: "",
+    status: "",
+    subtasks: [],
+  },
+  setShowSubtasks: () => {},
 });
 
 function App() {
@@ -57,6 +77,14 @@ function App() {
   const [showEditBoard, setShowEditBoard] = useState(false);
   const [currentPage, setCurrentPage] = useState<Board | null>(null);
   const [showAddNewTask, setShowAddNewTask] = useState(false);
+  const [showEditTask, setShowEditTask] = useState(false);
+  const [showSubtasks, setShowSubtasks] = useState<IShowSubtasks>({
+    show: false,
+    taskTitle: "",
+    status: "",
+    subtasks: [],
+  });
+  console.log(currentPage);
   useEffect(() => {
     const localST = localStorage.getItem("boards");
     if (!localST) {
@@ -85,6 +113,10 @@ function App() {
         setShowAddNewBoard,
         showAddNewTask,
         setShowAddNewTask,
+        showEditTask,
+        setShowEditTask,
+        showSubtasks,
+        setShowSubtasks,
       }}
     >
       <Router>

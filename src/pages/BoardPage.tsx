@@ -30,7 +30,7 @@ function BoardPage() {
   const {
     setBoardName,
     jsonBoards,
-    setShowEditBoard,
+    setShowSubtasks,
     showEditBoard,
     setCurrentPage,
     currentPage,
@@ -39,7 +39,6 @@ function BoardPage() {
     setBoardName(boardName);
   }
   useEffect(() => {
-    // Find the current board by name
     const currentBoard =
       jsonBoards.boards.find((item) => item.name === boardName) || null;
     setCurrentPage(currentBoard);
@@ -62,9 +61,23 @@ function BoardPage() {
               ></div>
               <h2 className="text-medium_Grey text-[1.8rem] w-[28rem] pb-[1rem]">{`${currentPage?.columns[index]?.name} (${currentPage?.columns[index]?.tasks.length}) `}</h2>
             </div>
-            <div onClick={() => setShowEditBoard(true)}>
+            <div>
               {item.tasks.map((m) => (
-                <div className=" cursor-pointer w-[28.8rem] px-[1.6rem] py-[2.3rem] mb-[1rem]  rounded-[0.8rem] bg-contentLight dark:bg-contentDarkBG">
+                <div
+                  onClick={() =>
+                    setShowSubtasks((prev) => ({
+                      ...prev,
+                      show: true,
+                      taskTitle: m.title,
+                      status: m.status,
+                      subtasks: m.subtasks.map((task) => ({
+                        title: task.title,
+                        isCompleted: task.isCompleted,
+                      })),
+                    }))
+                  }
+                  className=" cursor-pointer w-[28.8rem] px-[1.6rem] py-[2.3rem] mb-[1rem]  rounded-[0.8rem] bg-contentLight dark:bg-contentDarkBG"
+                >
                   <p>{m.title}</p>
                 </div>
               ))}

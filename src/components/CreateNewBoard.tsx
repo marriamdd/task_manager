@@ -3,7 +3,6 @@ import Cross from "../assets/icon-cross.svg";
 import { useContext, useEffect } from "react";
 import { Context } from "../App";
 
-// Define the type for form fields
 interface Column {
   columnsName: string;
 }
@@ -34,14 +33,13 @@ function CreateNewBoard() {
     setShowHeaderDropdown,
     jsonBoards,
     setJsonBoards,
-    boardName,
+
     setBoardName,
     showAddNewBoard,
     showEditBoard,
     setShowEditBoard,
+    currentPage,
   } = useContext(Context);
-
-  const currentPage = jsonBoards.boards.find((item) => item.name === boardName);
 
   useEffect(() => {
     if (showAddNewBoard) {
