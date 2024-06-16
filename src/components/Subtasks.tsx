@@ -3,14 +3,19 @@ import { Context } from "../App";
 import Dots from "../assets/icon-vertical-ellipsis.svg";
 
 function Subtasks() {
-  const { showSubtasks, setShowSubtasks, jsonBoards, setJsonBoards } =
-    useContext(Context);
+  const {
+    showSubtasks,
+    setShowSubtasks,
+    jsonBoards,
+    setJsonBoards,
+    currentPage,
+  } = useContext(Context);
 
   if (!showSubtasks.show) {
     return;
   }
 
-  const filt = showSubtasks.subtasks.filter((item) => item.isCompleted);
+  const filtered = showSubtasks.subtasks.filter((item) => item.isCompleted);
 
   const handleCheckboxChange = (subtaskIndex: number) => {
     setShowSubtasks((prev) => {
@@ -61,7 +66,13 @@ function Subtasks() {
   const handleCancelSubtasks = () => {
     setShowSubtasks((prev) => ({ ...prev, show: false }));
   };
-  console.log(showSubtasks.show);
+  const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedStatus = event.target.value;
+    setShowSubtasks((prev) => ({
+      ...prev,
+      status: selectedStatus,
+    }));
+  };
   return (
     <>
       <div
@@ -73,7 +84,7 @@ function Subtasks() {
        left-[4%] max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex justify-between items-center pb-[1rem]">
-          <h2 className="text-[1.8rem] font-[700]">
+          <h2 className="text-[1.8rem] font-[700] mt-[1rem]">
             {showSubtasks?.taskTitle}
           </h2>
           <img src={Dots} alt="dots" />
@@ -81,7 +92,7 @@ function Subtasks() {
         <p className="font-[500] my-[1rem] leading-[2.3rem]  text-[1.3rem] text-[#828FA3] ">
           {showSubtasks.description}
         </p>
-        <h3 className="text-[1.2rem] font-[700]  text-[#828FA3]">{`Subtasks(${filt.length} of ${showSubtasks.subtasks.length}) `}</h3>
+        <h3 className="text-[1.2rem] font-[700]  text-[#828FA3]">{`Subtasks(${filtered.length} of ${showSubtasks.subtasks.length}) `}</h3>
         <div className="flex flex-col gap-[1rem] my-[2rem]">
           {showSubtasks.subtasks.map((task, index) => (
             <div
@@ -99,6 +110,25 @@ function Subtasks() {
               </h3>
             </div>
           ))}
+        </div>
+        <div>
+          <h3>Current Status</h3>
+          <select
+            id="tasks"
+            name="tasks"
+            value={showSubtasks.status}
+            onChange={handleStatusChange}
+          >
+            {currentPage?.columns.map((col, index) => (
+              <option
+                key={index}
+                value={col.name}
+                selected={col.name === showSubtasks.status}
+              >
+                {col.name}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     </>
