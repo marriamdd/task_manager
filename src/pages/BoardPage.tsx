@@ -70,7 +70,9 @@ function BoardPage() {
                       show: true,
                       boardName: currentPage.name,
                       taskTitle: m.title,
+                      description: m.description,
                       status: m.status,
+
                       subtasks: m.subtasks.map((task) => ({
                         title: task.title,
                         isCompleted: task.isCompleted,

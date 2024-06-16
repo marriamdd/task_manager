@@ -18,6 +18,7 @@ export interface IShowSubtasks {
   taskTitle: string;
   status: string;
   subtasks: Subtask[];
+  description: string;
 }
 
 export interface IContext {
@@ -68,6 +69,7 @@ export const Context = createContext<IContext>({
     taskTitle: "",
     status: "",
     subtasks: [],
+    description: "",
   },
   setShowSubtasks: () => {},
 });
@@ -91,6 +93,7 @@ function App() {
     status: "",
     subtasks: [],
     boardName: "",
+    description: "",
   });
   console.log(currentPage);
   useEffect(() => {
