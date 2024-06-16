@@ -68,6 +68,7 @@ function BoardPage() {
                     setShowSubtasks((prev) => ({
                       ...prev,
                       show: true,
+                      boardName: currentPage.name,
                       taskTitle: m.title,
                       status: m.status,
                       subtasks: m.subtasks.map((task) => ({

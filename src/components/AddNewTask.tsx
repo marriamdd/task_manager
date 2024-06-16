@@ -9,8 +9,7 @@ interface ITask {
   subtasks: { subtaskName: string }[];
 }
 export default function AddNewTask() {
-  const { setShowAddNewTask, showAddNewTask, currentPage, showEditTask } =
-    useContext(Context);
+  const { showAddNewTask, showEditTask } = useContext(Context);
 
   const {
     register,

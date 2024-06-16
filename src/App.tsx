@@ -7,11 +7,17 @@ import BoardPage from "./pages/BoardPage";
 import Home from "./pages/Home";
 import Layout from "./layouts/Layout";
 
+export interface Subtask {
+  title: string;
+  isCompleted: boolean;
+}
+
 export interface IShowSubtasks {
+  boardName: string;
   show: boolean;
   taskTitle: string;
   status: string;
-  subtasks: { title: string; isCompleted: boolean }[];
+  subtasks: Subtask[];
 }
 
 export interface IContext {
@@ -58,6 +64,7 @@ export const Context = createContext<IContext>({
   setShowEditTask: () => {},
   showSubtasks: {
     show: false,
+    boardName: "",
     taskTitle: "",
     status: "",
     subtasks: [],
@@ -83,6 +90,7 @@ function App() {
     taskTitle: "",
     status: "",
     subtasks: [],
+    boardName: "",
   });
   console.log(currentPage);
   useEffect(() => {
