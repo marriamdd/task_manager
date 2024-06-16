@@ -92,7 +92,7 @@ function Subtasks() {
         <p className="font-[500] my-[1rem] leading-[2.3rem]  text-[1.3rem] text-[#828FA3] ">
           {showSubtasks.description}
         </p>
-        <h3 className="text-[1.2rem] font-[700]  text-[#828FA3]">{`Subtasks(${filtered.length} of ${showSubtasks.subtasks.length}) `}</h3>
+        <h3 className="text-[1.2rem] font-[700]  text-medium_Grey">{`Subtasks(${filtered.length} of ${showSubtasks.subtasks.length}) `}</h3>
         <div className="flex flex-col gap-[1rem] my-[2rem]">
           {showSubtasks.subtasks.map((task, index) => (
             <div
@@ -112,8 +112,19 @@ function Subtasks() {
           ))}
         </div>
         <div>
-          <h3>Current Status</h3>
+          <h3 className="text-[1.2rem] font-[700] text-medium_Grey">
+            Current Status
+          </h3>
           <select
+            style={{
+              marginTop: "1rem",
+              marginBottom: "2.5rem",
+              width: "29.5rem",
+              height: "4rem",
+              borderRadius: "0.4rem",
+              border: "1px solid rgba(130, 143, 163, 0.25)",
+            }}
+            className="text-[1.3rem] font-[500] px-[1rem] "
             id="tasks"
             name="tasks"
             value={showSubtasks.status}
