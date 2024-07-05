@@ -1,14 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../App";
 import Dots from "../assets/icon-vertical-ellipsis.svg";
 
 function Subtasks() {
+  const [ShowEditORDelete, setShowEditOrDelete] = useState(false);
   const {
     showSubtasks,
     setShowSubtasks,
     jsonBoards,
     setJsonBoards,
     currentPage,
+    setShowEditTask,
   } = useContext(Context);
 
   if (!showSubtasks.show) {
@@ -73,6 +75,11 @@ function Subtasks() {
       status: selectedStatus,
     }));
   };
+
+  //   <div className="absolute top-[5rem] w-[80px] right-[2rem] bg-[red]">
+  //   <h2 onClick={() => setShowEditBoard(true)}>Edit Board</h2>
+  //   <h2>Delete Board</h2>
+  // </div>
   return (
     <>
       <div
@@ -87,8 +94,25 @@ function Subtasks() {
           <h2 className="text-[1.8rem] font-[700] mt-[1rem]">
             {showSubtasks?.taskTitle}
           </h2>
-          <img src={Dots} alt="dots" />
+          <img
+            onClick={() => setShowEditOrDelete((prev) => !prev)}
+            src={Dots}
+            alt="dots"
+          />
         </div>
+        {ShowEditORDelete && (
+          <div className="absolute top-[5rem] w-[80px] right-[2rem] bg-[red]">
+            <h2
+              onClick={() => {
+                setShowEditTask(true);
+                setShowSubtasks((prev) => ({ ...prev, show: false }));
+              }}
+            >
+              Edit Board
+            </h2>
+            <h2>Delete Board</h2>
+          </div>
+        )}
         <p className="font-[500] my-[1rem] leading-[2.3rem]  text-[1.3rem] text-[#828FA3] ">
           {showSubtasks.description}
         </p>
@@ -132,6 +156,7 @@ function Subtasks() {
           >
             {currentPage?.columns.map((col, index) => (
               <option
+           
                 key={index}
                 value={col.name}
                 selected={col.name === showSubtasks.status}

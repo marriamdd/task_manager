@@ -1,115 +1,236 @@
-import { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Context } from "../App";
-
 import Cross from "../assets/icon-cross.svg";
+import { useParams } from "react-router-dom";
+
 interface ITask {
   title: string;
   description: string;
   subtasks: { subtaskName: string }[];
+  status: string;
 }
+
 export default function AddNewTask() {
-  const { showAddNewTask, showEditTask } = useContext(Context);
+  const {
+    setShowAddNewTask,
+    showAddNewTask,
+    setShowEditTask,
+    showEditTask,
+    currentPage,
+    showSubtasks,
+  } = useContext(Context);
+
+  const { boardName } = useParams();
+  const fakeRefresh = () => {
+    window.location.reload();
+  };
 
   const {
     register,
-    // setValue,
-    // setError,
+    setValue,
+    reset,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<ITask>({
     mode: "all",
     defaultValues: {
-      //   title: "",
-      //   description: "",
+      title: "",
+      description: "",
       subtasks: [{ subtaskName: "" }],
+      status: currentPage?.columns[0]?.name || "", // Default status to the first column name
     },
   });
+
   const { remove, append, fields } = useFieldArray({
     control,
     name: "subtasks",
   });
+
+  useEffect(() => {
+    if (showAddNewTask) {
+      reset({
+        title: "",
+        description: "",
+        subtasks: [{ subtaskName: "" }],
+        status: currentPage?.columns[0]?.name || "",
+      });
+    }
+    if (showEditTask && currentPage && showSubtasks) {
+      setValue("title", showSubtasks.taskTitle);
+      setValue("description", showSubtasks.description);
+      setValue(
+        "subtasks",
+        showSubtasks.subtasks.map((subtask) => ({
+          subtaskName: subtask.title,
+        }))
+      );
+      setValue("status", showSubtasks.status);
+    }
+  }, [
+    currentPage,
+    showAddNewTask,
+    showEditTask,
+    showSubtasks,
+    reset,
+    setValue,
+  ]);
+
   const onSubmit = (data: ITask) => {
     console.log(data);
+    const datastorage = localStorage.getItem("boards");
+
+    if (datastorage) {
+      const parsedData = JSON.parse(datastorage);
+      const currentBoard = parsedData.boards.find(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (board: any) => board.name === boardName
+      );
+
+      if (currentBoard) {
+        const currentColumn = currentBoard.columns.find(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (column: any) => column.name === data.status
+        );
+
+        if (currentColumn) {
+          const newTask = {
+            title: data.title,
+            description: data.description,
+            subtasks: data.subtasks.map((subtask) => ({
+              title: subtask.subtaskName,
+              isCompleted: false,
+            })),
+          };
+
+          currentColumn.tasks.push(newTask);
+
+          localStorage.setItem("boards", JSON.stringify(parsedData));
+          setShowAddNewTask(false);
+          setShowEditTask(false);
+        }
+      }
+    }
+    fakeRefresh();
   };
-  if (!showAddNewTask) return;
+
+  if (!showAddNewTask) return null;
+
+  const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue("status", event.target.value);
+  };
+
   return (
-    <div className="px-[2rem]">
-      <h2 className="text-[1.8rem] font-[700] my-[2rem]">
-        {!showEditTask ? "Add New Task" : "Edit task"}
-      </h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-[1.5rem]"
+    <>
+      <div
+        onClick={() => {
+          setShowAddNewTask(false);
+          setShowEditTask(false);
+        }}
+        className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
+      ></div>
+      <div
+        className={`fixed px-[2rem] top-[20%] left-[4%] max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-contentLight dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
-        <div className="flex flex-col gap-[0.5rem] ">
-          <label className="text-medium_Grey my-[0.5rem]" htmlFor="title">
-            Title
-          </label>
-          <input
-            className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
-            id="title"
-            type="text"
-            placeholder="e.g. Take coffee break"
-            {...register("title", {
-              required: { value: true, message: "Can’t be empty" },
-            })}
-          />
-          {errors.title && <p>{errors.title.message}</p>}
-        </div>
-        <div className="flex flex-col gap-[0.5rem] ">
-          <label className="text-medium_Grey my-[0.5rem]" htmlFor="description">
-            Description
-          </label>
-          <textarea
-            id="description"
-            placeholder="e.g. It’s always good to take a break. This 
-15 minute break will  recharge the batteries 
-a little."
-            className="w-[29.5rem] text-[1.3rem] leading-2.3rem] font-[500]  h-[11.5rem] text-wrap rounded-[4px] px-[1.6rem] pt-[1.5rem] border border-solid border-gray-400 border-opacity-25"
-            {...register("description", {
-              required: { value: true, message: "Can’t be empty" },
-            })}
-          ></textarea>
-        </div>
-        <div>
-          {fields.map((item, index) => (
-            <div key={index}>
-              <input
-                className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
-                id={`subtasks:${index}`}
-                type="text"
-                placeholder="e.g. Make coffee"
-                {...register(`subtasks.${index}.subtaskName`, {
-                  required: { value: true, message: "Can’t be empty" },
-                })}
-              />
-              <button
-                className="ml-[1rem]"
-                type="button"
-                onClick={() => remove(index)}
-                disabled={fields.length === 1}
-              >
-                <img src={Cross} alt="remove" />
-              </button>
-              {errors.subtasks?.[index]?.subtaskName && (
-                <p>{errors.subtasks[index]?.subtaskName?.message}</p>
-              )}
-            </div>
-          ))}
-        </div>
-        <button
-          className="text-[1.3rem] text-purple  font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
-          type="button"
-          onClick={() => append({ subtaskName: "" })}
+        <h2 className="text-[1.8rem] font-[700] my-[2rem]">
+          {!showEditTask ? "Add New Task" : "Edit Task"}
+        </h2>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-[1.5rem]"
         >
-          + Add New Subtask
-        </button>
-        <button type="submit" className="button">
-          Create Task
-        </button>
-      </form>
-    </div>
+          <div className="flex flex-col gap-[0.5rem]">
+            <label className="text-medium_Grey my-[0.5rem]" htmlFor="title">
+              Title
+            </label>
+            <input
+              className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
+              id="title"
+              type="text"
+              placeholder="e.g. Take coffee break"
+              {...register("title", {
+                required: { value: true, message: "Can’t be empty" },
+              })}
+            />
+            {errors.title && <p>{errors.title.message}</p>}
+          </div>
+          <div className="flex flex-col gap-[0.5rem]">
+            <label
+              className="text-medium_Grey my-[0.5rem]"
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
+              className="w-[29.5rem] text-[1.3rem] leading-2.3rem font-[500] h-[11.5rem] text-wrap rounded-[4px] px-[1.6rem] pt-[1.5rem] border border-solid border-gray-400 border-opacity-25"
+              {...register("description", {
+                required: { value: true, message: "Can’t be empty" },
+              })}
+            ></textarea>
+            {errors.description && <p>{errors.description.message}</p>}
+          </div>
+          <div>
+            {fields.map((item, index) => (
+              <div key={item.id}>
+                <input
+                  className="w-[29.5rem]  h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
+                  id={`subtasks.${index}.subtaskName`}
+                  type="text"
+                  placeholder="e.g. Make coffee"
+                  {...register(`subtasks.${index}.subtaskName`, {
+                    required: { value: true, message: "Can’t be empty" },
+                  })}
+                />
+                <button
+                  className="ml-[1rem]"
+                  type="button"
+                  onClick={() => remove(index)}
+                  disabled={fields.length === 1}
+                >
+                  <img src={Cross} alt="remove" />
+                </button>
+                {errors.subtasks?.[index]?.subtaskName && (
+                  <p>{errors.subtasks[index]?.subtaskName?.message}</p>
+                )}
+              </div>
+            ))}
+          </div>
+          <button
+            className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
+            type="button"
+            onClick={() => append({ subtaskName: "" })}
+          >
+            + Add New Subtask
+          </button>
+          <select
+            style={{
+              marginTop: "1rem",
+              marginBottom: "2.5rem",
+              width: "29.5rem",
+              height: "4rem",
+              borderRadius: "0.4rem",
+              border: "1px solid rgba(130, 143, 163, 0.25)",
+            }}
+            className="text-[1.3rem] font-[500] px-[1rem]"
+            id="tasks"
+            name="tasks"
+            value={showSubtasks.status}
+            onChange={handleStatusChange}
+          >
+            {currentPage?.columns.map((col, index) => (
+              <option key={index} value={col.name}>
+                {col.name}
+              </option>
+            ))}
+          </select>
+          <button type="submit" className="button">
+            {showEditTask ? "Update Task" : "Create Task"}
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
