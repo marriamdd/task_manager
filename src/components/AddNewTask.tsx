@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Context } from "../App";
 import Cross from "../assets/icon-cross.svg";
