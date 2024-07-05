@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Logo from "../assets/logo-mobile.svg";
 import { Context } from "../App";
 import ArrowDown from "../assets/icon-chevron-down.svg";
@@ -16,6 +16,25 @@ function Header() {
     setShowDeleteUI,
   } = useContext(Context);
   const [options, setOptions] = useState(false);
+
+  const optionsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        optionsRef.current &&
+        !optionsRef.current.contains(event.target as Node)
+      ) {
+        setOptions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <div className=" h-[6.4rem] bg-contentLight flex px-[2rem] ">
       <div className="flex w-[100%] justify-between items-center gap-[1rem]  ">
@@ -70,13 +89,14 @@ function Header() {
             />
             {options && (
               <div
+                ref={optionsRef}
                 style={{
                   boxShadow: "0px 10px 20px 0px rgba(54, 78, 126, 0.25)",
                   textWrap: "nowrap",
                   borderRadius: "8px ",
                   padding: "16px",
                 }}
-                className="absolute top-[4.3rem] right-[-10px]  bg-contentLight"
+                className=" optionsDiv absolute top-[4.3rem] right-[-10px]  bg-contentLight"
               >
                 <h2
                   style={{
