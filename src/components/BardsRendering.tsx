@@ -56,6 +56,7 @@ function BoardsRendering() {
           onClick={() => {
             setShowAddNewBoard(true);
             setShowEditBoard(false);
+            //mm
           }}
           className=" text-purple"
         >

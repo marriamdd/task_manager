@@ -33,7 +33,6 @@ function CreateNewBoard() {
     setShowHeaderDropdown,
     jsonBoards,
     setJsonBoards,
-
     setBoardName,
     showAddNewBoard,
     showEditBoard,
@@ -118,7 +117,11 @@ function CreateNewBoard() {
       >
         <div className="flex flex-col gap-[2rem] py-[1rem] px-[2rem]">
           <h2 className="text-[1.8rem] font-[700]">
-            {showEditBoard ? "Edit Board" : "Add New Board"}
+            {showEditBoard
+              ? "Edit Board"
+              : showAddNewBoard
+              ? "Add New Board"
+              : ""}
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-[0.5rem] relative">
@@ -149,7 +152,7 @@ function CreateNewBoard() {
               {fields.map((column, index) => (
                 <div
                   key={column.id}
-                  className="flex  items-center gap-[0.5rem] relative "
+                  className="flex items-center gap-[0.5rem] relative"
                 >
                   <input
                     className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1rem] border border-solid border-gray-400 border-opacity-25"
@@ -180,7 +183,7 @@ function CreateNewBoard() {
             </div>
 
             <button
-              className="text-[1.3rem] text-purple  font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
+              className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
               type="button"
               onClick={() => append({ columnsName: "" })}
             >
@@ -190,7 +193,11 @@ function CreateNewBoard() {
               className="w-[29.5rem] h-[4rem] text-[1.3rem] text-[white] font-[700] rounded-[2rem] bg-purple"
               type="submit"
             >
-              {showEditBoard ? "Save Changes" : "Create New Board"}
+              {showEditBoard
+                ? "Save Changes"
+                : showAddNewBoard
+                ? "Create New Board"
+                : ""}
             </button>
           </form>
         </div>

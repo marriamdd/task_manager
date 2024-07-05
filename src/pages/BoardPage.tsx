@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../App";
 import CreateNewBoard from "../components/CreateNewBoard";
+import DeleteUI from "../components/DeleteUI";
 
 function BoardPage() {
   const { boardName } = useParams();
@@ -32,8 +33,13 @@ function BoardPage() {
     jsonBoards,
     setShowSubtasks,
     showEditBoard,
+    setShowEditBoard,
     setCurrentPage,
     currentPage,
+    setShowEditTask,
+    setShowAddNewTask,
+    setShowAddNewBoard,
+    showDeleteUI,
   } = useContext(Context);
   if (boardName) {
     setBoardName(boardName);
@@ -89,12 +95,23 @@ function BoardPage() {
         ))}
 
         <div className=" flex justify-center items-center">
-          <h2 className="text-medium_Grey text-[2.4rem] cursor-pointer hover:text-purple  font-[700] w-[28.8rem] h-[6.1rem] bg-contentLight  text-center py-[1.2rem] rounded-[0.8rem]">
+          <h2
+            onClick={() => {
+              setShowAddNewBoard(true);
+              setShowAddNewTask(false);
+              setShowEditTask(true);
+              setShowEditBoard(true);
+              setShowSubtasks((prev) => ({ ...prev, show: false }));
+            }}
+            className="text-medium_Grey text-[2.4rem] cursor-pointer hover:text-purple  font-[700] w-[28.8rem] h-[6.1rem] bg-contentLight  text-center py-[1.2rem] rounded-[0.8rem]"
+          >
             + New Column
           </h2>
         </div>
       </div>
       {showEditBoard && <CreateNewBoard />}
+      {showDeleteUI && <DeleteUI />}
+      {/* {showAddNewBoard && <CreateNewBoard />} */}
     </>
   );
 }

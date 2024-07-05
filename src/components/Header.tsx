@@ -13,6 +13,7 @@ function Header() {
     showHeaderDropdown,
     setShowEditBoard,
     setShowAddNewTask,
+    setShowDeleteUI,
   } = useContext(Context);
   const [options, setOptions] = useState(false);
   return (
@@ -47,14 +48,17 @@ function Header() {
             />
           </div>
         </div>
-        <div
-          onClick={() => setShowAddNewTask((prev) => !prev)}
-          className="flex items-center gap-[1rem]"
-        >
-          <button className=" md:hidden button px-[2rem] py-[1.3rem]">
+        <div className="flex items-center gap-[1rem]">
+          <button
+            onClick={() => setShowAddNewTask((prev) => !prev)}
+            className=" md:hidden button px-[2rem] py-[1.3rem]"
+          >
             <img src={Plus} alt="Plus" />
           </button>
-          <button className="hidden  md:block  button px-[2rem] py-[1.3rem]">
+          <button
+            onClick={() => setShowAddNewTask((prev) => !prev)}
+            className="hidden  md:block  button px-[2rem] py-[1.3rem]"
+          >
             + Add New Task
           </button>
           <div className="flex flex-col items-center relative ">
@@ -65,9 +69,40 @@ function Header() {
               alt="more_icon"
             />
             {options && (
-              <div className="absolute top-[5rem] w-[80px] right-[2rem] bg-[red]">
-                <h2 onClick={() => setShowEditBoard(true)}>Edit Board</h2>
-                <h2>Delete Board</h2>
+              <div
+                style={{
+                  boxShadow: "0px 10px 20px 0px rgba(54, 78, 126, 0.25)",
+                  textWrap: "nowrap",
+                  borderRadius: "8px ",
+                  padding: "16px",
+                }}
+                className="absolute top-[4.3rem] right-[-10px]  bg-contentLight"
+              >
+                <h2
+                  style={{
+                    fontWeight: " 500",
+                    fontSize: "13px",
+                    lineHeight: "23px",
+                    color: "rgb(130, 143, 163)",
+                    width: "160px",
+                  }}
+                  onClick={() => setShowEditBoard(true)}
+                >
+                  Edit Board
+                </h2>
+                <h2
+                  onClick={() => setShowDeleteUI(true)}
+                  style={{
+                    fontWeight: " 500",
+                    fontSize: "13px",
+                    lineHeight: "23px",
+                    color: "rgb(234, 85, 85)",
+                    width: "160px",
+                    marginTop: "16px",
+                  }}
+                >
+                  Delete Board
+                </h2>
               </div>
             )}
           </div>

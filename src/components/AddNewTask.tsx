@@ -78,7 +78,6 @@ export default function AddNewTask() {
   ]);
 
   const onSubmit = (data: ITask) => {
-    console.log(data);
     const datastorage = localStorage.getItem("boards");
 
     if (datastorage) {
@@ -153,7 +152,15 @@ export default function AddNewTask() {
                 required: { value: true, message: "Can’t be empty" },
               })}
             />
-            {errors.title && <p>{errors.title.message}</p>}
+            {errors.title && (
+              <p
+                style={{
+                  color: "red",
+                }}
+              >
+                {errors.title.message}
+              </p>
+            )}
           </div>
           <div className="flex flex-col gap-[0.5rem]">
             <label
@@ -170,11 +177,27 @@ export default function AddNewTask() {
                 required: { value: true, message: "Can’t be empty" },
               })}
             ></textarea>
-            {errors.description && <p>{errors.description.message}</p>}
+            {errors.description && (
+              <p
+                style={{
+                  color: "red",
+                }}
+              >
+                {errors.description.message}
+              </p>
+            )}
           </div>
-          <div>
+          <label className="text-medium_Grey my-[0.5rem]" htmlFor="description">
+            Subtasks
+          </label>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+          >
             {fields.map((item, index) => (
-              <div key={item.id}>
+              <div
+                key={item.id}
+                style={{ display: "flex", gap: ".5rem", position: "relative" }}
+              >
                 <input
                   className="w-[29.5rem]  h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
                   id={`subtasks.${index}.subtaskName`}
@@ -193,7 +216,16 @@ export default function AddNewTask() {
                   <img src={Cross} alt="remove" />
                 </button>
                 {errors.subtasks?.[index]?.subtaskName && (
-                  <p>{errors.subtasks[index]?.subtaskName?.message}</p>
+                  <p
+                    style={{
+                      position: "absolute",
+                      right: "4rem",
+                      top: "1.1rem",
+                      color: "red",
+                    }}
+                  >
+                    {errors.subtasks[index]?.subtaskName?.message}
+                  </p>
                 )}
               </div>
             ))}
@@ -226,7 +258,7 @@ export default function AddNewTask() {
               </option>
             ))}
           </select>
-          <button type="submit" className="button">
+          <button style={{ height: "40px" }} type="submit" className="button">
             {showEditTask ? "Update Task" : "Create Task"}
           </button>
         </form>

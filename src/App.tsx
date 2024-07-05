@@ -42,6 +42,8 @@ export interface IContext {
   setShowEditTask: React.Dispatch<React.SetStateAction<boolean>>;
   showSubtasks: IShowSubtasks;
   setShowSubtasks: React.Dispatch<React.SetStateAction<IShowSubtasks>>;
+  showDeleteUI: boolean;
+  setShowDeleteUI: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Context = createContext<IContext>({
@@ -63,6 +65,8 @@ export const Context = createContext<IContext>({
   setShowAddNewTask: () => {},
   showEditTask: false,
   setShowEditTask: () => {},
+  showDeleteUI: false,
+  setShowDeleteUI: () => {},
   showSubtasks: {
     show: false,
     boardName: "",
@@ -87,6 +91,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState<Board | null>(null);
   const [showAddNewTask, setShowAddNewTask] = useState(false);
   const [showEditTask, setShowEditTask] = useState(false);
+  const [showDeleteUI, setShowDeleteUI] = useState(false);
   const [showSubtasks, setShowSubtasks] = useState<IShowSubtasks>({
     show: false,
     taskTitle: "",
@@ -95,7 +100,7 @@ function App() {
     boardName: "",
     description: "",
   });
-  console.log(currentPage);
+
   useEffect(() => {
     const localST = localStorage.getItem("boards");
     if (!localST) {
@@ -128,6 +133,8 @@ function App() {
         setShowEditTask,
         showSubtasks,
         setShowSubtasks,
+        showDeleteUI,
+        setShowDeleteUI,
       }}
     >
       <Router>
