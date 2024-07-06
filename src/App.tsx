@@ -28,8 +28,8 @@ export interface IContext {
   setJsonBoards: React.Dispatch<React.SetStateAction<IData>>;
   showHeaderDropdown: boolean;
   setShowHeaderDropdown: React.Dispatch<React.SetStateAction<boolean>>;
-  boardName: string;
-  setBoardName: React.Dispatch<React.SetStateAction<string>>;
+  currentBoardName: string;
+  setCurrentBoardName: React.Dispatch<React.SetStateAction<string>>;
   showAddNewBoard: boolean;
   setShowAddNewBoard: React.Dispatch<React.SetStateAction<boolean>>;
   showEditBoard: boolean;
@@ -53,8 +53,8 @@ export const Context = createContext<IContext>({
   setJsonBoards: () => {},
   showHeaderDropdown: false,
   setShowHeaderDropdown: () => {},
-  boardName: "",
-  setBoardName: () => {},
+  currentBoardName: "",
+  setCurrentBoardName: () => {},
   showAddNewBoard: false,
   setShowAddNewBoard: () => {},
   showEditBoard: false,
@@ -85,7 +85,7 @@ function App() {
   const [jsonBoards, setJsonBoards] = useState<IData>(Data);
 
   const [showHeaderDropdown, setShowHeaderDropdown] = useState(false);
-  const [boardName, setBoardName] = useState("");
+  const [currentBoardName, setCurrentBoardName] = useState("");
   const [showAddNewBoard, setShowAddNewBoard] = useState(false);
   const [showEditBoard, setShowEditBoard] = useState(false);
   const [currentPage, setCurrentPage] = useState<Board | null>(null);
@@ -123,8 +123,8 @@ function App() {
         setJsonBoards,
         showHeaderDropdown,
         setShowHeaderDropdown,
-        boardName,
-        setBoardName,
+        currentBoardName,
+        setCurrentBoardName,
         showAddNewBoard,
         setShowAddNewBoard,
         showAddNewTask,

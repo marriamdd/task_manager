@@ -1,8 +1,34 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../App";
+import { useNavigate, useParams } from "react-router-dom";
 
 function DeleteUI() {
-  const { setShowDeleteUI } = useContext(Context);
+  const { setShowDeleteUI, jsonBoards, setJsonBoards, setCurrentBoardName } =
+    useContext(Context);
+  console.log(jsonBoards.boards, "json");
+  const { boardName } = useParams();
+  console.log(boardName);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const localST = localStorage.getItem("boards");
+    if (!localST) {
+      localStorage.setItem("boards", JSON.stringify(jsonBoards));
+    } else {
+      const storage = JSON.parse(localST);
+      setJsonBoards(storage);
+    }
+  }, [jsonBoards, setJsonBoards]);
+
+  const deleteBoardFunc = () => {
+    const filtered = jsonBoards.boards.filter(
+      (item) => item.name !== boardName
+    );
+    localStorage.setItem("boards", JSON.stringify({ boards: filtered }));
+    setShowDeleteUI(false);
+    navigate("/");
+    setCurrentBoardName("");
+  };
   return (
     <div>
       <div
@@ -22,6 +48,7 @@ function DeleteUI() {
         </p>
         <div className="flex flex-col gap-[1.6rem] items-center ">
           <button
+            onClick={deleteBoardFunc}
             className="hover:bg-[#FF9898]  text-[13px] w-[295px] rounded-[20px] h-[40px]"
             style={{
               background: "var(--Red, #EA5555)",

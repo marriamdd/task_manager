@@ -18,7 +18,7 @@ function HeaderDropdown() {
   if (!showHeaderDropdown) {
     return null;
   }
-
+  console.log(jsonBoards.boards);
   return (
     <div className={`${darkMode ? "dark" : ""} relative `}>
       <div
@@ -31,7 +31,7 @@ function HeaderDropdown() {
       {!showAddNewBoard ? (
         <div className="fixed top-[15%]  ease left-[15%]  z-10 w-[26.4rem] shadow-md shadow-[#364e7e1a] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]">
           <div className=" h-[100%]">
-            <h2 className="text-medium_Grey my-[1rem] mx-[2rem] text-[1.2rem] font-[700]">{`ALL BOARDS (${jsonBoards.boards.length})`}</h2>
+            {/* <h2 className="text-medium_Grey my-[1rem] mx-[2rem] text-[1.2rem] font-[700]">{`ALL BOARDS (${jsonBoards.boards.length})`}</h2> */}
 
             <BoardsRendering />
             <ToggleMode />

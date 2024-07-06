@@ -1,10 +1,11 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import Logo from "../assets/logo-mobile.svg";
 import { Context } from "../App";
 import ArrowDown from "../assets/icon-chevron-down.svg";
 import ArrowUp from "../assets/icon-chevron-up.svg";
 import Plus from "../assets/icon-add-task-mobile.svg";
 import Dots from "../assets/icon-vertical-ellipsis.svg";
+import DeleteOrEditModal from "./DeleteOrEditModal";
 function Header() {
   const {
     setShowHeaderDropdown,
@@ -13,28 +14,11 @@ function Header() {
     showHeaderDropdown,
     setShowEditBoard,
     setShowAddNewTask,
-    setShowDeleteUI,
   } = useContext(Context);
   const [options, setOptions] = useState(false);
+  // const deleteBoard = () => {
 
-  const optionsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        optionsRef.current &&
-        !optionsRef.current.contains(event.target as Node)
-      ) {
-        setOptions(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  // };
   return (
     <div className=" h-[6.4rem] bg-contentLight flex px-[2rem] ">
       <div className="flex w-[100%] justify-between items-center gap-[1rem]  ">
@@ -88,42 +72,12 @@ function Header() {
               alt="more_icon"
             />
             {options && (
-              <div
-                ref={optionsRef}
-                style={{
-                  boxShadow: "0px 10px 20px 0px rgba(54, 78, 126, 0.25)",
-                  textWrap: "nowrap",
-                  borderRadius: "8px ",
-                  padding: "16px",
-                }}
-                className=" optionsDiv absolute top-[4.3rem] right-[-10px]  bg-contentLight"
-              >
-                <h2
-                  style={{
-                    fontWeight: " 500",
-                    fontSize: "13px",
-                    lineHeight: "23px",
-                    color: "rgb(130, 143, 163)",
-                    width: "160px",
-                  }}
-                  onClick={() => setShowEditBoard(true)}
-                >
-                  Edit Board
-                </h2>
-                <h2
-                  onClick={() => setShowDeleteUI(true)}
-                  style={{
-                    fontWeight: " 500",
-                    fontSize: "13px",
-                    lineHeight: "23px",
-                    color: "rgb(234, 85, 85)",
-                    width: "160px",
-                    marginTop: "16px",
-                  }}
-                >
-                  Delete Board
-                </h2>
-              </div>
+              <DeleteOrEditModal
+                setOptions={setOptions}
+                title="Edit Board"
+                showWhat={setShowEditBoard}
+                deletewhat="Delete Board"
+              />
             )}
           </div>
         </div>

@@ -6,7 +6,7 @@ import PurpleBoardIcon from "../assets/fluent_board-split-24-regular.svg";
 function BoardsRendering() {
   const {
     jsonBoards,
-    boardName,
+    currentBoardName,
     setShowAddNewBoard,
     setShowEditBoard,
     setShowHeaderDropdown,
@@ -19,7 +19,7 @@ function BoardsRendering() {
           style={{ borderRadius: "0px 100px 100px 0px" }}
           className={`flex gap-[2rem] mb-[0.5rem] w-[24rem]   font-[700] text-[1.5rem]  py-[1rem] px-[1.5rem] items-center 
             ${
-              boardName === board.name
+              currentBoardName === board.name
                 ? "bg-purple text-[#FFF] "
                 : "text-medium_Grey"
             }

@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { Context } from "../App";
 import Dots from "../assets/icon-vertical-ellipsis.svg";
+import DeleteOrEditModal from "./DeleteOrEditModal";
 
 function Subtasks() {
-  const [ShowEditORDelete] = useState(false);
+  // const [showEditORDelete, setShowEditORDelete] = useState(false);
+  const [options, setOptions] = useState(false);
   const {
     showSubtasks,
     setShowSubtasks,
@@ -11,7 +13,6 @@ function Subtasks() {
     setJsonBoards,
     currentPage,
     setShowEditTask,
-    showEditTask,
   } = useContext(Context);
 
   if (!showSubtasks.show) {
@@ -88,29 +89,25 @@ function Subtasks() {
        left-[4%] max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex justify-between items-center pb-[1rem]">
-          <h2 className="text-[1.8rem] font-[700] mt-[1rem]">
+          <h2 className="text-[1.8rem]  font-[700] mt-[1rem]">
             {showSubtasks?.taskTitle}
           </h2>
           <img
-            // onClick={() => setShowEditOrDelete((prev) => !prev)}
+            onClick={() => {
+              setOptions((prev) => !prev);
+            }}
             src={Dots}
             alt="dots"
           />
         </div>
-        {ShowEditORDelete ||
-          (showEditTask && (
-            <div className="absolute top-[5rem] w-[80px] right-[2rem] bg-[red]">
-              <h2
-                onClick={() => {
-                  setShowEditTask(true);
-                  setShowSubtasks((prev) => ({ ...prev, show: false }));
-                }}
-              >
-                Edit Board
-              </h2>
-              <h2>Delete Board</h2>
-            </div>
-          ))}
+        {options && (
+          <DeleteOrEditModal
+            setOptions={setOptions}
+            title="Edit Task"
+            showWhat={setShowEditTask}
+            deletewhat="Delete Task"
+          />
+        )}
         <p className="font-[500] my-[1rem] leading-[2.3rem]  text-[1.3rem] text-[#828FA3] ">
           {showSubtasks.description}
         </p>

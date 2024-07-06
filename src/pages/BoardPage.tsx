@@ -29,7 +29,7 @@ function BoardPage() {
     "#FF00FF",
   ];
   const {
-    setBoardName,
+    setCurrentBoardName,
     jsonBoards,
     setShowSubtasks,
     showEditBoard,
@@ -42,7 +42,7 @@ function BoardPage() {
     showDeleteUI,
   } = useContext(Context);
   if (boardName) {
-    setBoardName(boardName);
+    setCurrentBoardName(boardName);
   }
   useEffect(() => {
     const currentBoard =
