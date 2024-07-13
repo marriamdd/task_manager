@@ -58,7 +58,7 @@ function Header() {
           </button>
           <button
             onClick={() => setShowAddNewTask((prev) => !prev)}
-            className="hidden  md:block  button px-[2rem] py-[1.3rem] bg-light_purple"
+            className="hidden  md:block  button px-[2rem] py-[1.3rem] bg-purple hover:bg-light_purple"
           >
             + Add New Task
           </button>
