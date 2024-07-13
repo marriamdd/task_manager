@@ -44,6 +44,8 @@ export interface IContext {
   setShowSubtasks: React.Dispatch<React.SetStateAction<IShowSubtasks>>;
   showDeleteUI: boolean;
   setShowDeleteUI: React.Dispatch<React.SetStateAction<boolean>>;
+  showDeleteTaskUI: boolean;
+  setShowDeleteTaskUI: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Context = createContext<IContext>({
@@ -75,6 +77,8 @@ export const Context = createContext<IContext>({
     subtasks: [],
     description: "",
   },
+  showDeleteTaskUI: false,
+  setShowDeleteTaskUI: () => {},
   setShowSubtasks: () => {},
 });
 
@@ -92,6 +96,7 @@ function App() {
   const [showAddNewTask, setShowAddNewTask] = useState(false);
   const [showEditTask, setShowEditTask] = useState(false);
   const [showDeleteUI, setShowDeleteUI] = useState(false);
+  const [showDeleteTaskUI, setShowDeleteTaskUI] = useState(false);
   const [showSubtasks, setShowSubtasks] = useState<IShowSubtasks>({
     show: false,
     taskTitle: "",
@@ -135,6 +140,8 @@ function App() {
         setShowSubtasks,
         showDeleteUI,
         setShowDeleteUI,
+        showDeleteTaskUI,
+        setShowDeleteTaskUI,
       }}
     >
       <Router>

@@ -10,15 +10,13 @@ function Header() {
   const {
     setShowHeaderDropdown,
     setShowAddNewBoard,
-    boardName,
+    currentBoardName,
     showHeaderDropdown,
     setShowEditBoard,
     setShowAddNewTask,
   } = useContext(Context);
   const [options, setOptions] = useState(false);
-  // const deleteBoard = () => {
 
-  // };
   return (
     <div className=" h-[6.4rem] bg-contentLight flex px-[2rem] ">
       <div className="flex w-[100%] justify-between items-center gap-[1rem]  ">
@@ -38,7 +36,7 @@ function Header() {
               setShowEditBoard(false);
             }}
           >
-            <h1 className="text-[1.8rem] font-[700]"> {boardName}</h1>
+            <h1 className="text-[1.8rem] font-[700]"> {currentBoardName}</h1>
             <img
               className={`${!showHeaderDropdown ? "hidden" : "visible"} `}
               src={ArrowUp}
@@ -60,7 +58,7 @@ function Header() {
           </button>
           <button
             onClick={() => setShowAddNewTask((prev) => !prev)}
-            className="hidden  md:block  button px-[2rem] py-[1.3rem]"
+            className="hidden  md:block  button px-[2rem] py-[1.3rem] bg-light_purple"
           >
             + Add New Task
           </button>

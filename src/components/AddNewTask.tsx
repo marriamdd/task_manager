@@ -140,7 +140,7 @@ export default function AddNewTask() {
           className="flex flex-col gap-[1.5rem]"
         >
           <div className="flex flex-col gap-[0.5rem]">
-            <label className="text-medium_Grey my-[0.5rem]" htmlFor="title">
+            <label className="text-medium_Grey my-[0.5rem] " htmlFor="title">
               Title
             </label>
             <input
@@ -231,7 +231,7 @@ export default function AddNewTask() {
             ))}
           </div>
           <button
-            className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
+            className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple dark:bg-purple dark:text-white"
             type="button"
             onClick={() => append({ subtaskName: "" })}
           >
@@ -249,7 +249,7 @@ export default function AddNewTask() {
             className="text-[1.3rem] font-[500] px-[1rem]"
             id="tasks"
             name="tasks"
-            value={showSubtasks.status}
+            // value={showSubtasks.status}
             onChange={handleStatusChange}
           >
             {currentPage?.columns.map((col, index) => (

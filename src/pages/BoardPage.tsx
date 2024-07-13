@@ -2,7 +2,8 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../App";
 import CreateNewBoard from "../components/CreateNewBoard";
-import DeleteUI from "../components/DeleteUI";
+import DeleteUI from "../components/DeleteBoardUI";
+import DeleteTaskUI from "../components/DeleteTaskUI";
 
 function BoardPage() {
   const { boardName } = useParams();
@@ -40,6 +41,7 @@ function BoardPage() {
     setShowAddNewTask,
     setShowAddNewBoard,
     showDeleteUI,
+    showDeleteTaskUI,
   } = useContext(Context);
   if (boardName) {
     setCurrentBoardName(boardName);
@@ -103,7 +105,7 @@ function BoardPage() {
               setShowEditBoard(true);
               setShowSubtasks((prev) => ({ ...prev, show: false }));
             }}
-            className="text-medium_Grey text-[2.4rem] cursor-pointer hover:text-purple  font-[700] w-[28.8rem] h-[6.1rem] bg-contentLight  text-center py-[1.2rem] rounded-[0.8rem]"
+            className="text-medium_Grey text-[2.4rem] cursor-pointer hover:text-purple dark:bg-[#20212C] dark:text-purple  font-[700] w-[28.8rem] h-[6.1rem] bg-contentLight  text-center py-[1.2rem] rounded-[0.8rem]"
           >
             + New Column
           </h2>
@@ -111,6 +113,7 @@ function BoardPage() {
       </div>
       {showEditBoard && <CreateNewBoard />}
       {showDeleteUI && <DeleteUI />}
+      {showDeleteTaskUI && <DeleteTaskUI />}
       {/* {showAddNewBoard && <CreateNewBoard />} */}
     </>
   );

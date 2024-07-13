@@ -4,7 +4,6 @@ import Dots from "../assets/icon-vertical-ellipsis.svg";
 import DeleteOrEditModal from "./DeleteOrEditModal";
 
 function Subtasks() {
-  // const [showEditORDelete, setShowEditORDelete] = useState(false);
   const [options, setOptions] = useState(false);
   const {
     showSubtasks,
@@ -77,7 +76,7 @@ function Subtasks() {
       status: selectedStatus,
     }));
   };
-
+  console.log(showSubtasks?.taskTitle, "subt");
   return (
     <>
       <div

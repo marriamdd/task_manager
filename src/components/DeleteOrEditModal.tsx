@@ -14,8 +14,12 @@ const DeleteOrEditModal: React.FC<DeleteOrEditModalProps> = ({
   showWhat,
   deletewhat,
 }) => {
-  const { setShowDeleteUI, setShowAddNewTask, setShowSubtasks } =
-    useContext(Context);
+  const {
+    setShowDeleteUI,
+    setShowDeleteTaskUI,
+    setShowAddNewTask,
+    setShowSubtasks,
+  } = useContext(Context);
 
   const optionsRef = useRef<HTMLDivElement>(null);
 
@@ -35,6 +39,7 @@ const DeleteOrEditModal: React.FC<DeleteOrEditModalProps> = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   return (
     <div
       ref={optionsRef}
@@ -47,6 +52,7 @@ const DeleteOrEditModal: React.FC<DeleteOrEditModalProps> = ({
       className=" optionsDiv absolute top-[4.3rem] right-[-10px]  bg-contentLight"
     >
       <h2
+        className="dark:text-[#828FA3]"
         style={{
           fontWeight: " 500",
           fontSize: "13px",
@@ -65,8 +71,19 @@ const DeleteOrEditModal: React.FC<DeleteOrEditModalProps> = ({
       </h2>
       <h2
         onClick={() => {
-          setShowDeleteUI(true);
-          setOptions(false);
+          if (title === "Edit Task") {
+            setShowDeleteTaskUI(true);
+            setOptions(false);
+            setShowSubtasks((prev) => ({ ...prev, show: false }));
+          } else if (title === "Edit Board") {
+            setShowDeleteUI(true);
+            setOptions(false);
+            setShowSubtasks((prev) => ({ ...prev, show: false }));
+          } else {
+            setShowDeleteTaskUI(false);
+            setShowDeleteUI(false);
+            setOptions(false);
+          }
         }}
         style={{
           fontWeight: " 500",

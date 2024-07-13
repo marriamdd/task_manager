@@ -40,6 +40,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
 @layer components {
   .button {
     background-color: #635fc7;
@@ -52,4 +53,27 @@ button {
     opacity: 0.8;
     transition: opacity 0.5s ease;
   }
+  label {
+    @apply dark:text-white;
+  }
+  input {
+    @apply dark:bg-contentDarkBG;
+    @apply dark:text-white;
+  }
+  textarea {
+    @apply dark:bg-contentDarkBG;
+  }
+  select {
+    @apply dark:bg-contentDarkBG;
+    @apply dark:text-white;
+  }
+  h2 {
+    @apply dark:text-white;
+  }
+}
+.scrollbar {
+  @apply dark:bg-[#20212C];
+}
+.optionsDiv {
+  @apply dark:bg-[#20212C];
 }

@@ -183,7 +183,7 @@ function CreateNewBoard() {
             </div>
 
             <button
-              className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple"
+              className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple "
               type="button"
               onClick={() => append({ columnsName: "" })}
             >
