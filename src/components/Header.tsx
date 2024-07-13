@@ -29,14 +29,17 @@ function Header() {
             Kanban
           </h3>
           <div
-            className="flex items-center gap-[0.9rem] cursor-pointer"
+            className="flex items-center gap-[0.9rem] cursor-pointer "
             onClick={() => {
               setShowHeaderDropdown((prev) => !prev);
               setShowAddNewBoard(false);
               setShowEditBoard(false);
             }}
           >
-            <h1 className="text-[1.8rem] font-[700]"> {currentBoardName}</h1>
+            <h1 className="text-[1.8rem] font-[700] md:ml-[10rem] lg:ml-[14rem] transition-all duration-500 ease-in-out">
+              {" "}
+              {currentBoardName}
+            </h1>
             <img
               className={`${!showHeaderDropdown ? "hidden" : "visible"} `}
               src={ArrowUp}

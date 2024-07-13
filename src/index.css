@@ -55,25 +55,36 @@ button {
   }
   label {
     @apply dark:text-white;
+    transition: all 1ms ease-in-out;
   }
   input {
     @apply dark:bg-contentDarkBG;
     @apply dark:text-white;
+    transition: all 1ms ease-in-out;
   }
   textarea {
     @apply dark:bg-contentDarkBG;
+    transition: all 1ms ease-in-out;
   }
   select {
     @apply dark:bg-contentDarkBG;
     @apply dark:text-white;
+    transition: all 1ms ease-in-out;
   }
   h2 {
     @apply dark:text-white;
+    transition: all 1ms ease-in-out;
   }
 }
 .scrollbar {
   @apply dark:bg-[#20212C];
+  transition: all 1ms ease-in-out;
 }
 .optionsDiv {
   @apply dark:bg-[#20212C];
+  transition: all 1ms ease-in-out;
+}
+p {
+  @apply dark:text-white;
+  font-size: 15px;
 }
