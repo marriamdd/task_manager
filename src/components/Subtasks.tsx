@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Context } from "../App";
+import { Context } from "../context/context";
 import Dots from "../assets/icon-vertical-ellipsis.svg";
 import DeleteOrEditModal from "./DeleteOrEditModal";
 
@@ -114,7 +114,7 @@ function Subtasks() {
         <div className="flex flex-col gap-[1rem] my-[2rem]">
           {showSubtasks.subtasks.map((task, index) => (
             <div
-              className="flex gap-[1rem] pl-[1.3rem] py-[1.8rem] rounded-[0.4rem] bg-lightBG"
+              className="flex gap-[1rem] pl-[1.3rem] py-[1.8rem] rounded-[0.4rem] bg-lightB dark:bg-[#20212C]"
               key={index}
               onClick={() => handleCheckboxChange(index)}
             >

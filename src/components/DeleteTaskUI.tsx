@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Context } from "../App";
+import { Context } from "../context/context";
 
 export default function DeleteTaskUI() {
   const { setShowDeleteTaskUI, jsonBoards } = useContext(Context);

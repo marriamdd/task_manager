@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from "react";
-import { Context } from "../App";
+import { Context } from "../context/context";
 
 interface DeleteOrEditModalProps {
   setOptions: React.Dispatch<React.SetStateAction<boolean>>;

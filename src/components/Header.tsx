@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Logo from "../assets/logo-mobile.svg";
-import { Context } from "../App";
+import { Context } from "../context/context";
 import ArrowDown from "../assets/icon-chevron-down.svg";
 import ArrowUp from "../assets/icon-chevron-up.svg";
 import Plus from "../assets/icon-add-task-mobile.svg";
@@ -18,35 +18,49 @@ function Header() {
   const [options, setOptions] = useState(false);
 
   return (
-    <div className=" h-[6.4rem] bg-contentLight flex px-[2rem] ">
+    <div className=" h-[6.4rem] bg-contentLight dark:bg-[#2B2C37] flex px-[2rem] ">
       <div className="flex w-[100%] justify-between items-center gap-[1rem]  ">
         <div
           className="flex items-center gap-[0.9rem] md:space-x-4
         "
         >
           <img src={Logo} alt="Logo" />
-          <h3 className="hidden md:inline-block font-bold md:text-4xl">
-            Kanban
-          </h3>
-          <div
-            className="flex items-center gap-[0.9rem] cursor-pointer "
+          <h3
             onClick={() => {
               setShowHeaderDropdown((prev) => !prev);
               setShowAddNewBoard(false);
               setShowEditBoard(false);
             }}
+            className="hidden md:inline-block font-bold md:text-4xl dark:text-white"
           >
-            <h1 className="text-[1.8rem] font-[700] md:ml-[10rem] lg:ml-[14rem] transition-all duration-500 ease-in-out">
+            Kanban
+          </h3>
+          <div className="flex items-center gap-[0.9rem] cursor-pointer ">
+            <h1 className="text-[1.8rem] font-[700] md:ml-[10rem] lg:ml-[14rem] transition-all duration-500 ease-in-out dark:text-white">
               {" "}
               {currentBoardName}
             </h1>
             <img
-              className={`${!showHeaderDropdown ? "hidden" : "visible"} `}
+              onClick={() => {
+                setShowHeaderDropdown((prev) => !prev);
+                setShowAddNewBoard(false);
+                setShowEditBoard(false);
+              }}
+              className={`${
+                !showHeaderDropdown ? "hidden" : "visible"
+              } md:hidden`}
               src={ArrowUp}
               alt="ArrowUp"
             />
             <img
-              className={`${showHeaderDropdown ? "hidden" : "visible"} `}
+              onClick={() => {
+                setShowHeaderDropdown((prev) => !prev);
+                setShowAddNewBoard(false);
+                setShowEditBoard(false);
+              }}
+              className={`${
+                showHeaderDropdown ? "hidden" : "visible"
+              }  md:hidden`}
               src={ArrowDown}
               alt="ArrowDown"
             />

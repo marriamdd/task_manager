@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import BoardIcon from "../assets/icon-board.svg";
 import { Link } from "react-router-dom";
-import { Context } from "../App";
+import { Context } from "../context/context";
 import PurpleBoardIcon from "../assets/fluent_board-split-24-regular.svg";
 function BoardsRendering() {
   const {

@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Context } from "../App";
+import { Subtask } from "../App";
+import { Context } from "../context/context";
 import CreateNewBoard from "../components/CreateNewBoard";
 import DeleteUI from "../components/DeleteBoardUI";
 import DeleteTaskUI from "../components/DeleteTaskUI";
@@ -54,8 +55,7 @@ function BoardPage() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const completedSubtasks = (subtasks: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return subtasks.filter((task: any) => task.isCompleted);
+    return subtasks.filter((task: Subtask) => task.isCompleted);
   };
   return (
     <>
@@ -95,7 +95,7 @@ function BoardPage() {
                   className=" cursor-pointer w-[28.8rem] px-[1.6rem] py-[2.3rem] mb-[1rem]  rounded-[0.8rem] bg-contentLight dark:bg-contentDarkBG"
                 >
                   <p>{m.title}</p>
-                  <h3 className="text-[1.2rem] font-[700] text-medium_Grey ">{`Subtasks (${
+                  <h3 className="text-[1.2rem] font-[700] text-medium_Grey pt-[0.5rem]">{`Subtasks (${
                     completedSubtasks(m.subtasks).length
                   } of ${m.subtasks.length})`}</h3>
                 </div>

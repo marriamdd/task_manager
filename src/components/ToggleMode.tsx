@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Context } from "../App";
+import { Context } from "../context/context";
 import Sun from "../assets/icon-light-theme.svg";
 import Moon from "../assets/icon-dark-theme.svg";
 const ToggleMode: React.FC = () => {

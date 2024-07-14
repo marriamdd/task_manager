@@ -1,7 +1,7 @@
 import { useFieldArray, useForm, FieldValues } from "react-hook-form";
 import Cross from "../assets/icon-cross.svg";
 import { useContext, useEffect } from "react";
-import { Context } from "../App";
+import { Context } from "../context/context";
 
 interface Column {
   columnsName: string;

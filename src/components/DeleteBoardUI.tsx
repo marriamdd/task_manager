@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Context } from "../App";
+import { Context } from "../context/context";
 import { useNavigate, useParams } from "react-router-dom";
 
 function DeleteUI() {
