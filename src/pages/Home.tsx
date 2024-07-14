@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { Context } from "../App";
+
 import BeforeChooseBoard from "../components/BeforeChooseBoard";
+import { Context } from "../context/context";
 
 function Home() {
   const { currentBoardName } = useContext(Context);

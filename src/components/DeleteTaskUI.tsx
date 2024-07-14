@@ -1,17 +1,43 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../context/context";
 
 export default function DeleteTaskUI() {
-  const { setShowDeleteTaskUI, jsonBoards } = useContext(Context);
+  const { setShowDeleteTaskUI, jsonBoards, showSubtasks, setJsonBoards } =
+    useContext(Context);
 
   console.log(jsonBoards.boards, "json");
+  const deleteTaskFunc = () => {
+    const updatedBoards = jsonBoards.boards.map((board) => ({
+      ...board,
+      columns: board.columns.map((col) => ({
+        ...col,
+        tasks: col.tasks.filter(
+          (task) => task.title !== showSubtasks.taskTitle
+        ),
+      })),
+    }));
 
-  const deleteTaskFunc = () => {};
+    setJsonBoards((prevState) => ({
+      ...prevState,
+      boards: updatedBoards,
+    }));
+
+    localStorage.setItem(
+      "boards",
+      JSON.stringify({
+        ...jsonBoards,
+        boards: updatedBoards,
+      })
+    );
+  };
+  useEffect(() => {
+    localStorage.setItem("boards", JSON.stringify(jsonBoards));
+  }, [deleteTaskFunc]);
   return (
     <div>
       <div
         onClick={() => setShowDeleteTaskUI(false)}
-        className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
+        className="bg-[#000] fixed top-0 left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
         className={`fixed flex text-[18px] flex-col gap-[2.4rem] top-[20%] px-[2rem]
@@ -26,7 +52,10 @@ export default function DeleteTaskUI() {
         </p>
         <div className="flex flex-col gap-[1.6rem] items-center ">
           <button
-            onClick={deleteTaskFunc}
+            onClick={() => {
+              deleteTaskFunc();
+              setShowDeleteTaskUI(false);
+            }}
             className="hover:bg-[#FF9898]  text-[13px] w-[295px] rounded-[20px] h-[40px]"
             style={{
               background: "var(--Red, #EA5555)",

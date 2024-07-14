@@ -5,7 +5,7 @@ import { Context } from "../context/context";
 import CreateNewBoard from "../components/CreateNewBoard";
 import DeleteUI from "../components/DeleteBoardUI";
 import DeleteTaskUI from "../components/DeleteTaskUI";
-
+import EyeIcon from "../assets/Group 3.svg";
 function BoardPage() {
   const { boardName } = useParams();
   const colors = [
@@ -43,6 +43,8 @@ function BoardPage() {
     setShowAddNewBoard,
     showDeleteUI,
     showDeleteTaskUI,
+    showHeaderDropdown,
+    setShowHeaderDropdown,
   } = useContext(Context);
   if (boardName) {
     setCurrentBoardName(boardName);
@@ -59,7 +61,11 @@ function BoardPage() {
   };
   return (
     <>
-      <div className="scrollbar flex gap-[2rem] px-[1.5rem] py-[2rem] w-full overflow-x-scroll ">
+      <div
+        className={`scrollbar flex gap-2 ${
+          showHeaderDropdown ? "md:pl-[280px] lg:pl-[320px] " : ""
+        }  px-[1.5rem] py-2 w-full overflow-x-scroll transition-all duration-1000 ease `}
+      >
         {currentPage?.columns.map((item, index) => (
           <div>
             <div className="flex  gap-[0.5rem]">
@@ -119,6 +125,19 @@ function BoardPage() {
           </h2>
         </div>
       </div>
+      <div className=" ak bottom-[3rem] absolute hidden md:flex">
+        <img
+          onClick={() => {
+            setShowHeaderDropdown((prev) => !prev);
+            setShowAddNewBoard(false);
+            setShowEditBoard(false);
+          }}
+          className=" "
+          src={EyeIcon}
+          alt=""
+        />
+      </div>
+
       {showEditBoard && <CreateNewBoard />}
       {showDeleteUI && <DeleteUI />}
       {showDeleteTaskUI && <DeleteTaskUI />}

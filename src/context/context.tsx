@@ -5,8 +5,6 @@ import { IContext } from "./contextTypes";
 import { IShowSubtasks } from "../App";
 
 export const Context = createContext<IContext>({
-  darkMode: false,
-  setDarkMode: () => {},
   jsonBoards: { boards: [] },
   setJsonBoards: () => {},
   showHeaderDropdown: false,
@@ -43,9 +41,6 @@ interface ContextProviderProps {
 }
 
 export const ContextProvider = ({ children }: ContextProviderProps) => {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("mode") === "dark"
-  );
   const [jsonBoards, setJsonBoards] = useState<IData>(Data);
 
   const [showHeaderDropdown, setShowHeaderDropdown] = useState(false);
@@ -83,8 +78,7 @@ export const ContextProvider = ({ children }: ContextProviderProps) => {
         setCurrentPage,
         showEditBoard,
         setShowEditBoard,
-        darkMode,
-        setDarkMode,
+
         jsonBoards,
         setJsonBoards,
         showHeaderDropdown,

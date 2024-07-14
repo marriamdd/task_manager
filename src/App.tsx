@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Layout from "./layouts/Layout";
 
 import { ContextProvider } from "./context/context";
+import { DarkModeProvider } from "./components/DarkModeContext";
 
 export interface Subtask {
   title: string;
@@ -23,14 +24,16 @@ export interface IShowSubtasks {
 function App() {
   return (
     <ContextProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/:boardName" element={<BoardPage />} />
-          </Route>
-        </Routes>
-      </Router>
+      <DarkModeProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/:boardName" element={<BoardPage />} />
+            </Route>
+          </Routes>
+        </Router>
+      </DarkModeProvider>
     </ContextProvider>
   );
 }

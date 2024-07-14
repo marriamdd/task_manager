@@ -33,11 +33,11 @@ function DeleteUI() {
     <div>
       <div
         onClick={() => setShowDeleteUI(false)}
-        className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
+        className="bg-[#000] fixed top-0 left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
         className={`fixed flex text-[18px] flex-col gap-[2.4rem] top-[20%] px-[2rem]
-           left-[4%]  overflow-y-scroll z-10  w-[34.3rem] h-[28.4rem] bg-contentLight  dark:bg-contentDarkBG py-[2rem] rounded-[0.8rem]`}
+             left-1/2 transform -translate-x-1/2  overflow-y-scroll z-10  w-[34.3rem] h-[28.4rem] bg-contentLight  dark:bg-contentDarkBG py-[2rem] rounded-[0.8rem]`}
       >
         <h2 className="text-[#EA5555] font-[700]  whitespace-nowrap">
           Delete this board?

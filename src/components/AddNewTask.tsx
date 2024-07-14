@@ -39,7 +39,7 @@ export default function AddNewTask() {
       title: "",
       description: "",
       subtasks: [{ subtaskName: "" }],
-      status: currentPage?.columns[0]?.name || "", // Default status to the first column name
+      status: currentPage?.columns[0]?.name || "",
     },
   });
 
@@ -127,10 +127,10 @@ export default function AddNewTask() {
           setShowAddNewTask(false);
           setShowEditTask(false);
         }}
-        className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
+        className="bg-[#000] fixed top-0  left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed px-[2rem] top-[20%] left-[4%] max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-contentLight dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+        className={`fixed px-[2rem] top-[20%]    left-1/2 transform -translate-x-1/2 max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-contentLight dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <h2 className="text-[1.8rem] font-[700] my-[2rem]">
           {!showEditTask ? "Add New Task" : "Edit Task"}

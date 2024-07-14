@@ -2,8 +2,6 @@ import { IShowSubtasks } from "../App";
 import { Board, IData } from "../dataTypes";
 
 export interface IContext {
-  darkMode: boolean;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
   jsonBoards: IData;
   setJsonBoards: React.Dispatch<React.SetStateAction<IData>>;
   showHeaderDropdown: boolean;

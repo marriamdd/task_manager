@@ -76,16 +76,16 @@ function Subtasks() {
       status: selectedStatus,
     }));
   };
-  console.log(showSubtasks?.taskTitle, "subt");
+  console.log(showSubtasks, "subt");
   return (
     <>
       <div
         onClick={() => handleCancelSubtasks()}
-        className="bg-[#000] fixed top-[6.4rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
+        className="bg-[#000]   fixed top-[0rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed px-[2rem] top-[20%]
-       left-[4%] max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+        className={`fixed px-[2rem] top-[20%] 
+      left-1/2 transform -translate-x-1/2  max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex justify-between items-center pb-[1rem]">
           <h2 className="text-[1.8rem]  font-[700] mt-[1rem]">
