@@ -6,6 +6,7 @@ import Layout from "./layouts/Layout";
 
 import { ContextProvider } from "./context/context";
 import { DarkModeProvider } from "./components/DarkModeContext";
+import NotFound from "./pages/NotFound";
 
 export interface Subtask {
   title: string;
@@ -30,6 +31,7 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/:boardName" element={<BoardPage />} />
+              <Route path="/NotFound" element={<NotFound />} />
             </Route>
           </Routes>
         </Router>

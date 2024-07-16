@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Subtask } from "../App";
 import { Context } from "../context/context";
 import CreateNewBoard from "../components/CreateNewBoard";
@@ -49,10 +49,14 @@ function BoardPage() {
   if (boardName) {
     setCurrentBoardName(boardName);
   }
+  const navigate = useNavigate();
   useEffect(() => {
     const currentBoard =
       jsonBoards.boards.find((item) => item.name === boardName) || null;
     setCurrentPage(currentBoard);
+    if (!currentBoard) {
+      navigate("/NotFound");
+    }
   }, [jsonBoards, boardName]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
