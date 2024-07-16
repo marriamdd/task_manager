@@ -14,7 +14,7 @@ function BoardsRendering() {
   } = useContext(Context);
 
   return (
-    <div className="max-h-[60vh] overflow-y-scroll">
+    <div className="max-h-[60vh] overflow-y-auto">
       {jsonBoards.boards.map((board, index) => (
         <div
           style={{ borderRadius: "0px 100px 100px 0px" }}

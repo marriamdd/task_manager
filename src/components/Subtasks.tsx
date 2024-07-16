@@ -85,7 +85,9 @@ function Subtasks() {
       ></div>
       <div
         className={`fixed px-[2rem] 
-      left-1/2 transform -translate-x-1/2  md:max-h-[523px] max-h-[557px] overflow-y-scroll z-10 w-[34.3rem] md:w-[480px] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+      left-1/2 transform -translate-x-1/2 
+  
+        z-10 w-[34.3rem] md:w-[480px] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex justify-between items-center pb-[1rem]">
           <h2 className="text-[1.8rem]  font-[700] mt-[1rem]">
@@ -112,7 +114,7 @@ function Subtasks() {
           {showSubtasks.description}
         </p>
         <h3 className="text-[1.2rem] font-[700]   text-medium_Grey">{`Subtasks(${filtered.length} of ${showSubtasks.subtasks.length}) `}</h3>
-        <div className="flex flex-col gap-[1rem] my-[2rem]">
+        <div className="flex flex-col gap-[1rem] my-[2rem] overflow-y-auto">
           {showSubtasks.subtasks.map((task, index) => (
             <div
               className="flex gap-[1rem] cursor-pointer pl-[1.3rem] py-[1.8rem] rounded-[0.4rem] bg-[#F4F7FD] dark:bg-[#20212C]"

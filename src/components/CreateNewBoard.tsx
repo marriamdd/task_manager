@@ -113,7 +113,7 @@ function CreateNewBoard() {
       ></div>
       <div
         className={`fixed  top-[20%] md:w-[480px]
-             left-1/2 transform -translate-x-1/2 max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+             left-1/2 transform -translate-x-1/2 max-h-[70vh] overflow-y-auto z-10 w-[34.3rem] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex flex-col gap-[2rem] py-[1rem] px-[2rem]">
           <h2 className="text-[1.8rem] font-[700] cursor-pointer">

@@ -64,7 +64,7 @@ function BoardPage() {
       <div
         className={`scrollbar flex gap-2 ${
           showHeaderDropdown ? "md:pl-[280px] lg:pl-[320px] " : ""
-        }  px-[1.5rem] py-2 w-full overflow-x-scroll transition-all duration-1000 ease `}
+        }  px-[1.5rem] py-2 w-full overflow-x-auto transition-all duration-1000 ease `}
       >
         {currentPage?.columns.map((item, index) => (
           <div>
@@ -132,7 +132,7 @@ function BoardPage() {
             setShowAddNewBoard(false);
             setShowEditBoard(false);
           }}
-          className=" cursor-pointer"
+          className="hover:opacity-50 cursor-pointer"
           src={EyeIcon}
           alt=""
         />

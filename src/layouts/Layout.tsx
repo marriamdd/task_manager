@@ -1,14 +1,13 @@
-import { useContext } from "react";
-
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import HeaderDropdown from "../components/HeaderDropdown";
 import AddNewTask from "../components/AddNewTask";
 import Subtasks from "../components/Subtasks";
-import { Context } from "../context/context";
+
+import { useDarkMode } from "../components/DarkModeContext";
 
 function Layout() {
-  const { darkMode } = useContext(Context);
+  const { darkMode } = useDarkMode();
 
   return (
     <div className={darkMode ? "dark" : ""}>

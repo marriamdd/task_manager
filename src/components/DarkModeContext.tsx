@@ -11,7 +11,7 @@ interface DarkModeContextType {
   setDarkMode: (darkMode: boolean) => void;
 }
 
-const DarkModeContext = createContext<DarkModeContextType | undefined>(
+export const DarkModeContext = createContext<DarkModeContextType | undefined>(
   undefined
 );
 
