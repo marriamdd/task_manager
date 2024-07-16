@@ -39,11 +39,13 @@ function HeaderDropdown() {
             <BoardsRendering />
             <ToggleMode />
             <div
+              style={{ borderRadius: "0px 100px 100px 0px" }}
               onClick={() => setShowHeaderDropdown(false)}
-              className="hidden md:flex gap-[1.5rem] ml-[2rem] pt-[2rem] pb-[4rem] cursor-pointer  "
+              className="hidden  md:flex gap-[1.5rem] items-center  w-[24rem]  hover:bg-[#FFF] h-[48px]   mt-[2rem] mb-[4rem] cursor-pointer "
             >
-              <img src={HideIcon} alt="HideIcon" />
-              <h2 className="text-[15px] dark:text-[#828FA3] font-[700] text-medium_Grey ">
+              <img className="pl-[2rem]" src={HideIcon} alt="HideIcon" />
+
+              <h2 className="text-[15px]  dark:text-[#828FA3]  font-[700] text-medium_Grey ">
                 Hide Sidebar
               </h2>
             </div>

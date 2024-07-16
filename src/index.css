@@ -68,6 +68,7 @@ body {
   label {
     @apply dark:text-white;
     transition: all 1ms ease-in-out;
+    cursor: pointer;
   }
   input {
     @apply dark:bg-contentDarkBG;
@@ -76,12 +77,14 @@ body {
   }
   textarea {
     @apply dark:bg-contentDarkBG;
+    @apply dark:text-white;
     transition: all 1ms ease-in-out;
   }
   select {
     @apply dark:bg-contentDarkBG;
     @apply dark:text-white;
     transition: all 1ms ease-in-out;
+    cursor: pointer;
   }
   h2 {
     @apply dark:text-white;

@@ -132,7 +132,7 @@ function BoardPage() {
             setShowAddNewBoard(false);
             setShowEditBoard(false);
           }}
-          className=" "
+          className=" cursor-pointer"
           src={EyeIcon}
           alt=""
         />

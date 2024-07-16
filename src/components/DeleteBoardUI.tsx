@@ -36,17 +36,17 @@ function DeleteUI() {
         className="bg-[#000] fixed top-0 left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed flex text-[18px] flex-col gap-[2.4rem] top-[20%] px-[2rem]
-             left-1/2 transform -translate-x-1/2  overflow-y-scroll z-10  w-[34.3rem] h-[28.4rem] bg-contentLight  dark:bg-contentDarkBG py-[2rem] rounded-[0.8rem]`}
+        className={`fixed flex text-[18px] md:w-[480px] md:h-[229px] flex-col gap-[2.4rem] top-[20%] px-[2rem]
+             left-1/2 transform -translate-x-1/2  z-10  w-[34.3rem] h-[28.4rem] bg-contentLight  dark:bg-contentDarkBG py-[2rem] rounded-[0.8rem]`}
       >
         <h2 className="text-[#EA5555] font-[700]  whitespace-nowrap">
           Delete this board?
         </h2>
-        <p className="text-[#828FA3] w-[295px] text-[13px]  leading-[23px]">
+        <p className="text-[#828FA3] md:w-[416px] w-[295px] text-[13px]  leading-[23px]">
           Are you sure you want to delete the ‘Platform Launch’ board? This
           action will remove all columns and tasks and cannot be reversed.
         </p>
-        <div className="flex flex-col gap-[1.6rem] items-center ">
+        <div className="flex flex-col md:flex-row  gap-[1.6rem] items-center  ">
           <button
             onClick={deleteBoardFunc}
             className="hover:bg-[#FF9898]  text-[13px] w-[295px] rounded-[20px] h-[40px]"

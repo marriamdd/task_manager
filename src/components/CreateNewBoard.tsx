@@ -112,11 +112,11 @@ function CreateNewBoard() {
         className="bg-[#000] fixed top-0 left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed  top-[20%]
+        className={`fixed  top-[20%] md:w-[480px]
              left-1/2 transform -translate-x-1/2 max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-contentLight  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex flex-col gap-[2rem] py-[1rem] px-[2rem]">
-          <h2 className="text-[1.8rem] font-[700]">
+          <h2 className="text-[1.8rem] font-[700] cursor-pointer">
             {showEditBoard
               ? "Edit Board"
               : showAddNewBoard
@@ -129,7 +129,7 @@ function CreateNewBoard() {
                 Board Name
               </label>
               <input
-                className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1rem] border border-solid border-gray-400 border-opacity-25"
+                className="w-[29.5rem] h-[4rem] md:w-[416px]  rounded-[4px] px-[1rem] border border-solid border-gray-400 border-opacity-25"
                 id="boardName"
                 type="text"
                 placeholder="e.g. Web Design"
@@ -155,7 +155,7 @@ function CreateNewBoard() {
                   className="flex items-center gap-[0.5rem] relative"
                 >
                   <input
-                    className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1rem] border border-solid border-gray-400 border-opacity-25"
+                    className="w-[29.5rem] md:w-[416px] h-[4rem] rounded-[4px] px-[1rem] border border-solid border-gray-400 border-opacity-25"
                     id={`columnName-${index}`}
                     type="text"
                     placeholder="e.g. Todo"
@@ -176,21 +176,21 @@ function CreateNewBoard() {
                     onClick={() => remove(index)}
                     disabled={fields.length === 1}
                   >
-                    <img src={Cross} alt="remove" />
+                    <img className="cursor-pointer" src={Cross} alt="remove" />
                   </button>
                 </div>
               ))}
             </div>
 
             <button
-              className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple "
+              className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] md:w-[416px] h-[4rem] rounded-[2rem] bg-light_purple hover:text-white hover:bg-purple"
               type="button"
               onClick={() => append({ columnsName: "" })}
             >
               + Add New Column
             </button>
             <button
-              className="w-[29.5rem] h-[4rem] text-[1.3rem] text-[white] font-[700] rounded-[2rem] bg-purple"
+              className="w-[29.5rem] md:w-[416px] h-[4rem] text-[1.3rem] text-[white] font-[700] rounded-[2rem] bg-purple"
               type="submit"
             >
               {showEditBoard

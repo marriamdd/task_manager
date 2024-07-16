@@ -84,14 +84,15 @@ function Subtasks() {
         className="bg-[#000]   fixed top-[0rem]  left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed px-[2rem] top-[20%] 
-      left-1/2 transform -translate-x-1/2  max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+        className={`fixed px-[2rem] 
+      left-1/2 transform -translate-x-1/2  md:max-h-[523px] max-h-[557px] overflow-y-scroll z-10 w-[34.3rem] md:w-[480px] bg-[white]  dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <div className="flex justify-between items-center pb-[1rem]">
           <h2 className="text-[1.8rem]  font-[700] mt-[1rem]">
             {showSubtasks?.taskTitle}
           </h2>
           <img
+            className="cursor-pointer"
             onClick={() => {
               setOptions((prev) => !prev);
             }}
@@ -110,11 +111,11 @@ function Subtasks() {
         <p className="font-[500] my-[1rem] leading-[2.3rem]  text-[1.3rem] text-[#828FA3] ">
           {showSubtasks.description}
         </p>
-        <h3 className="text-[1.2rem] font-[700]  text-medium_Grey">{`Subtasks(${filtered.length} of ${showSubtasks.subtasks.length}) `}</h3>
+        <h3 className="text-[1.2rem] font-[700]   text-medium_Grey">{`Subtasks(${filtered.length} of ${showSubtasks.subtasks.length}) `}</h3>
         <div className="flex flex-col gap-[1rem] my-[2rem]">
           {showSubtasks.subtasks.map((task, index) => (
             <div
-              className="flex gap-[1rem] pl-[1.3rem] py-[1.8rem] rounded-[0.4rem] bg-lightB dark:bg-[#20212C]"
+              className="flex gap-[1rem] cursor-pointer pl-[1.3rem] py-[1.8rem] rounded-[0.4rem] bg-[#F4F7FD] dark:bg-[#20212C]"
               key={index}
               onClick={() => handleCheckboxChange(index)}
             >
@@ -137,12 +138,12 @@ function Subtasks() {
             style={{
               marginTop: "1rem",
               marginBottom: "2.5rem",
-              width: "29.5rem",
+
               height: "4rem",
               borderRadius: "0.4rem",
               border: "1px solid rgba(130, 143, 163, 0.25)",
             }}
-            className="text-[1.3rem] font-[500] px-[1rem] "
+            className="text-[1.3rem] cursor-pointer font-[500] px-[1rem] w-[29.5rem] md:w-[416px] "
             id="tasks"
             name="tasks"
             value={showSubtasks.status}

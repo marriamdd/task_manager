@@ -130,7 +130,7 @@ export default function AddNewTask() {
         className="bg-[#000] fixed top-0  left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed px-[2rem] top-[20%]    left-1/2 transform -translate-x-1/2 max-h-[70vh] overflow-y-scroll z-10 w-[34.3rem] bg-contentLight dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+        className={`fixed px-[2rem]  md:max-h-[675px]  md:w-[480px]  left-1/2 transform -translate-x-1/2 max-h-[659px]  overflow-y-scroll z-10 w-[34.3rem] bg-contentLight dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <h2 className="text-[1.8rem] font-[700] my-[2rem]">
           {!showEditTask ? "Add New Task" : "Edit Task"}
@@ -144,7 +144,7 @@ export default function AddNewTask() {
               Title
             </label>
             <input
-              className="w-[29.5rem] h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
+              className="w-[29.5rem] h-[4rem] md:w-[416px] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
               id="title"
               type="text"
               placeholder="e.g. Take coffee break"
@@ -172,7 +172,7 @@ export default function AddNewTask() {
             <textarea
               id="description"
               placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
-              className="w-[29.5rem] text-[1.3rem] leading-2.3rem font-[500] h-[11.5rem] text-wrap rounded-[4px] px-[1.6rem] pt-[1.5rem] border border-solid border-gray-400 border-opacity-25"
+              className="w-[29.5rem] text-[1.3rem] md:w-[416px] leading-2.3rem font-[500] h-[11.5rem] text-wrap rounded-[4px] px-[1.6rem] pt-[1.5rem] border border-solid border-gray-400 border-opacity-25"
               {...register("description", {
                 required: { value: true, message: "Can’t be empty" },
               })}
@@ -199,7 +199,7 @@ export default function AddNewTask() {
                 style={{ display: "flex", gap: ".5rem", position: "relative" }}
               >
                 <input
-                  className="w-[29.5rem]  h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
+                  className="w-[29.5rem] md:w-[416px] h-[4rem] rounded-[4px] px-[1.6rem] border border-solid border-gray-400 border-opacity-25"
                   id={`subtasks.${index}.subtaskName`}
                   type="text"
                   placeholder="e.g. Make coffee"
@@ -213,7 +213,7 @@ export default function AddNewTask() {
                   onClick={() => remove(index)}
                   disabled={fields.length === 1}
                 >
-                  <img src={Cross} alt="remove" />
+                  <img className="cursor-pointer" src={Cross} alt="remove" />
                 </button>
                 {errors.subtasks?.[index]?.subtaskName && (
                   <p
@@ -231,7 +231,7 @@ export default function AddNewTask() {
             ))}
           </div>
           <button
-            className="text-[1.3rem] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple dark:bg-purple dark:text-white"
+            className="text-[1.3rem] md:w-[416px] text-purple font-[700] mb-[2rem] w-[29.5rem] h-[4rem] rounded-[2rem] bg-light_purple dark:bg-purple dark:text-white"
             type="button"
             onClick={() => append({ subtaskName: "" })}
           >
@@ -241,12 +241,12 @@ export default function AddNewTask() {
             style={{
               marginTop: "1rem",
               marginBottom: "2.5rem",
-              width: "29.5rem",
+
               height: "4rem",
               borderRadius: "0.4rem",
               border: "1px solid rgba(130, 143, 163, 0.25)",
             }}
-            className="text-[1.3rem] font-[500] px-[1rem]"
+            className="text-[1.3rem] w-[29.5rem] md:w-[416px] font-[500] px-[1rem]"
             id="tasks"
             name="tasks"
             // value={showSubtasks.status}

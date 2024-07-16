@@ -52,7 +52,7 @@ const DeleteOrEditModal: React.FC<DeleteOrEditModalProps> = ({
       className=" optionsDiv absolute top-[4.3rem] right-[-10px]  bg-contentLight"
     >
       <h2
-        className="dark:text-[#828FA3]"
+        className="dark:text-[#828FA3] cursor-pointer"
         style={{
           fontWeight: " 500",
           fontSize: "13px",
@@ -92,6 +92,7 @@ const DeleteOrEditModal: React.FC<DeleteOrEditModalProps> = ({
           color: "rgb(234, 85, 85)",
           width: "160px",
           marginTop: "16px",
+          cursor: "pointer",
         }}
       >
         {deletewhat}
