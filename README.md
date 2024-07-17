@@ -20,11 +20,11 @@
 
 ### Tech Stack
 
-- <img src="readme/react.png" width="25" style="top: 8px" /> _React @18.2.0 - front-end framework_
+- <img src="assets/react.png" width="25" style="top: 8px" /> _React @18.2.0 - front-end framework_
 - <img src="/assets/G0R0sjHH_400x400.jpg" width="25" style="top: 8px" /> _Tailwind_css @5.3.6 - visual primitives for the component age_
-- <img src="readme/router.png" width="25" style="top: 8px" /> _React Router @6.6.1 - React library for routing_
-- <img src="readme/helmet.jpg" width="25" style="top: 8px" /> _React Helmet @6.1.0 - library for write code in head from JSX_
-- <img src="readme/react-hook-form-logo-only.png" width="25" style="top: 8px" /> \_React Hook Form @7.1.1 - Library for Handling Form State and Validation in React
+- <img src="assets/router.png" width="25" style="top: 8px" /> _React Router @6.6.1 - React library for routing_
+
+- <img src="/assets/react-hook-form-logo-only 1.05.05 AM.png" width="25" style="top: 8px" /> \_React Hook Form @7.1.1 - Library for Handling Form State and Validation in React
 - <img src="readme/Screenshot 2024-06-30 at 3.19.37 PM.png" width="25" style="top: 8px" /> \_react-input/mask
   -Library used to enter input in a certain format such as numeric, date, currency, email and phone.
 
