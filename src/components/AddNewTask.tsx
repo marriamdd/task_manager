@@ -130,7 +130,7 @@ export default function AddNewTask() {
         className="bg-[#000] fixed top-0  left-0 right-0 bottom-0 opacity-[0.5] z-10"
       ></div>
       <div
-        className={`fixed px-[2rem]  md:max-h-[675px]  md:w-[480px]  left-1/2 transform -translate-x-1/2 max-h-[659px]   z-10 w-[34.3rem] bg-contentLight dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
+        className={`fixed px-[2rem] md:top-[5.4rem] top-[0.5rem]   md:w-[480px]  left-1/2 transform -translate-x-1/2    z-10 w-[34.3rem] bg-contentLight dark:bg-contentDarkBG py-[1rem] rounded-[0.8rem]`}
       >
         <h2 className="text-[1.8rem] font-[700] my-[2rem]">
           {!showEditTask ? "Add New Task" : "Edit Task"}
@@ -191,7 +191,7 @@ export default function AddNewTask() {
             Subtasks
           </label>
           <div
-            className=" max-h-[80px] overflow-y-auto"
+            className=" md:max-h-[90px] max-h-[60px] overflow-y-auto"
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
           >
             {fields.map((item, index) => (
@@ -250,7 +250,6 @@ export default function AddNewTask() {
             className="text-[1.3rem] w-[29.5rem] md:w-[416px] font-[500] px-[1rem]"
             id="tasks"
             name="tasks"
-            // value={showSubtasks.status}
             onChange={handleStatusChange}
           >
             {currentPage?.columns.map((col, index) => (

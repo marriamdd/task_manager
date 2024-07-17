@@ -28,7 +28,7 @@ const ToggleMode: React.FC = () => {
         <div
           className={`w-[1.4rem] h-[1.4rem] bg-white cursor-pointer rounded-xl ${
             darkMode ? "ml-[1.5rem] " : "ml-[0rem]"
-          } transition-all duration-500 ease`}
+          } transition-all duration-[1s] ease`}
         ></div>
       </div>
       <img

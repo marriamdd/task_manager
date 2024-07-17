@@ -22,7 +22,7 @@ function BoardsRendering() {
             ${
               currentBoardName === board.name
                 ? "bg-purple text-[#FFF]  "
-                : "text-medium_Grey  hover:bg-white "
+                : "text-medium_Grey  hover:dark:bg-white hover:bg-[#E4EBFA]"
             }
            `}
           key={index}

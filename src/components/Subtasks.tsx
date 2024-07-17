@@ -76,7 +76,7 @@ function Subtasks() {
       status: selectedStatus,
     }));
   };
-  console.log(showSubtasks, "subt");
+
   return (
     <>
       <div
@@ -117,13 +117,13 @@ function Subtasks() {
         <div className="flex flex-col gap-[1rem] my-[2rem] overflow-y-auto">
           {showSubtasks.subtasks.map((task, index) => (
             <div
-              className="flex gap-[1rem] cursor-pointer pl-[1.3rem] py-[1.8rem] rounded-[0.4rem] bg-[#F4F7FD] dark:bg-[#20212C]"
+              className="flex gap-[1rem] hover:bg-[#b4b2e3] overflow-y-auto cursor-pointer pl-[1.3rem] py-[1.8rem] rounded-[0.4rem] bg-[#F4F7FD] dark:bg-[#20212C]"
               key={index}
               onClick={() => handleCheckboxChange(index)}
             >
               <input type="checkbox" checked={task.isCompleted} />
               <h3
-                className={`text-[grey] text-[1.2rem] font-[700] opacity-[0.5] ${
+                className={`text-[grey]  text-[1.2rem] font-[700] opacity-[0.5] ${
                   task.isCompleted && "line-through"
                 } `}
               >

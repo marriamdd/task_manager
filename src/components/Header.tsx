@@ -26,17 +26,13 @@ function Header() {
         >
           <img src={Logo} alt="Logo" />
           <h3
-            onClick={() => {
-              setShowHeaderDropdown((prev) => !prev);
-              setShowAddNewBoard(false);
-              setShowEditBoard(false);
-            }}
+            onClick={() => setShowHeaderDropdown(true)}
             className="hidden md:inline-block font-bold md:text-4xl dark:text-white"
           >
             Kanban
           </h3>
           <div className="flex items-center gap-[0.9rem] cursor-pointer ">
-            <h1 className="text-[1.8rem] font-[700] md:ml-[10rem] lg:ml-[14rem] transition-all duration-500 ease-in-out dark:text-white">
+            <h1 className="text-[1.8rem] font-[700] md:ml-[11rem] lg:ml-[15rem] transition-all duration-[1s] ease-in-out dark:text-white">
               {" "}
               {currentBoardName}
             </h1>

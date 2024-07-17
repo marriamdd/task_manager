@@ -5,7 +5,7 @@ import { Context } from "../context/context";
 import CreateNewBoard from "../components/CreateNewBoard";
 import DeleteUI from "../components/DeleteBoardUI";
 import DeleteTaskUI from "../components/DeleteTaskUI";
-import EyeIcon from "../assets/Group 3.svg";
+
 function BoardPage() {
   const { boardName } = useParams();
   const colors = [
@@ -44,11 +44,17 @@ function BoardPage() {
     showDeleteUI,
     showDeleteTaskUI,
     showHeaderDropdown,
-    setShowHeaderDropdown,
   } = useContext(Context);
-  if (boardName) {
-    setCurrentBoardName(boardName);
-  }
+
+  useEffect(() => {
+    if (boardName) {
+      const boardNamesArray = jsonBoards.boards.map((item) => item.name);
+      if (boardNamesArray.includes(boardName)) {
+        setCurrentBoardName(boardName);
+      }
+    }
+  }, [boardName, jsonBoards.boards, setCurrentBoardName]);
+
   const navigate = useNavigate();
   useEffect(() => {
     const currentBoard =
@@ -63,15 +69,18 @@ function BoardPage() {
   const completedSubtasks = (subtasks: any) => {
     return subtasks.filter((task: Subtask) => task.isCompleted);
   };
+
   return (
     <>
       <div
         className={`scrollbar flex gap-2 ${
-          showHeaderDropdown ? "md:pl-[280px] lg:pl-[320px] " : ""
-        }  px-[1.5rem] py-2 w-full overflow-x-auto transition-all duration-1000 ease `}
+          showHeaderDropdown
+            ? "md:pl-[280px] lg:pl-[320px] transition-all duration-[1s] "
+            : ""
+        }  px-[1.5rem] py-2 w-full overflow-x-auto transition-all duration-[1s]  `}
       >
         {currentPage?.columns.map((item, index) => (
-          <div>
+          <div key={index}>
             <div className="flex  gap-[0.5rem]">
               <div
                 style={{
@@ -85,8 +94,9 @@ function BoardPage() {
               <h2 className="text-medium_Grey text-[1.8rem] w-[28rem] pb-[1rem]">{`${currentPage?.columns[index]?.name} (${currentPage?.columns[index]?.tasks.length}) `}</h2>
             </div>
             <div>
-              {item.tasks.map((m) => (
+              {item.tasks.map((m, index) => (
                 <div
+                  key={index}
                   onClick={() =>
                     setShowSubtasks((prev) => ({
                       ...prev,
@@ -123,29 +133,16 @@ function BoardPage() {
               setShowEditBoard(true);
               setShowSubtasks((prev) => ({ ...prev, show: false }));
             }}
-            className="text-medium_Grey text-[2.4rem] cursor-pointer hover:text-purple dark:bg-[#20212C] dark:text-purple  font-[700] w-[28.8rem] h-[6.1rem] bg-contentLight  text-center py-[1.2rem] rounded-[0.8rem]"
+            className="text-medium_Grey ml-[1rem] hover:bg-[#b4b2e3] text-[2.4rem] cursor-pointer hover:dark:text-[white] hover:text-purple dark:bg-[#20212C] dark:text-purple  font-[700] w-[28.8rem] h-[6.1rem]  transition-all duration-[1s] shadow-inner -ml-18 -mt-44 -z-247 -mr-139 bg-rgba-214-207-214 text-center py-[1.2rem] rounded-[0.8rem]"
           >
             + New Column
           </h2>
         </div>
       </div>
-      <div className=" ak bottom-[3rem] absolute hidden md:flex">
-        <img
-          onClick={() => {
-            setShowHeaderDropdown((prev) => !prev);
-            setShowAddNewBoard(false);
-            setShowEditBoard(false);
-          }}
-          className="hover:opacity-50 cursor-pointer"
-          src={EyeIcon}
-          alt=""
-        />
-      </div>
 
       {showEditBoard && <CreateNewBoard />}
       {showDeleteUI && <DeleteUI />}
       {showDeleteTaskUI && <DeleteTaskUI />}
-      {/* {showAddNewBoard && <CreateNewBoard />} */}
     </>
   );
 }

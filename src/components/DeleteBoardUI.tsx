@@ -5,9 +5,9 @@ import { useNavigate, useParams } from "react-router-dom";
 function DeleteUI() {
   const { setShowDeleteUI, jsonBoards, setJsonBoards, setCurrentBoardName } =
     useContext(Context);
-  console.log(jsonBoards.boards, "json");
+
   const { boardName } = useParams();
-  console.log(boardName);
+
   const navigate = useNavigate();
 
   useEffect(() => {
